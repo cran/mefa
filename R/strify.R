@@ -15,6 +15,7 @@ for(i in 1:dim(table.out)[2]){table.out[,i] <- aggregate(table[,i], list(str), s
 colnames(table.out) <- colnames(table)
 rownames(table.out) <- levels(str)
 ifelse(which == "samples", data <- as.matrix(table.out), data <- as.matrix(t(table.out)))
+data <- data[order(as.character(rownames(data))), order(as.character(colnames(data)))]
 out <- list(segment = xc$segment,
 data = data,
 nsamples = dim(data)[1],
