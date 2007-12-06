@@ -21,7 +21,7 @@ attrib.sub <- subset(attrib, exclude == TRUE)
 attrib.sub[] <- lapply(attrib.sub, function(x) x[drop=TRUE])
 attrib.out <- attrib.sub[order(as.character(attrib.sub[,index])),]}
 rownames(attrib.out) <- index.out
-as.data.frame(attrib.out)
+attrib.out <- as.data.frame(attrib.out)
 out <- list(which = which, check.setrel = check1, check.dupl = check2, data = attrib.out)
 class(out) <- "xorder"
 return(out)}
