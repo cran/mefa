@@ -6,7 +6,7 @@
 The function makes an object of class 'xorder' from an attribute table (data frame) based on comparison with an 'xcount' object. Data frame subsetting is made according to results of function \code{\link{check.attrib}}.
 }
 \usage{
-xorder(xc, which = c("samples", "species"), attrib, index = 1)
+xorder(xc, which = c("samples", "species"), attrib, index = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,7 +16,7 @@ xorder(xc, which = c("samples", "species"), attrib, index = 1)
   \item{attrib}{data frame to be checked.}
   \item{index}{column identifier within \code{attrib} to be compared according to row/column names (as sample/species
     identifiers) of the 'xcount' object according to value of \code{which}. 
-    By default it is the first column of data frame \code{attrib}.}
+    By default, index = 0, and rownames are taken as identifiers.}
 }
 \value{
 A result is an object of class 'xorder'.
@@ -73,7 +73,7 @@ vt <- as.xcount(vtable, FALSE)
 spec <- xorder(vt, which="species", landsnail, 2)
 spec
 
-sampl <- xorder(vt, which="samples", vsample)
+sampl <- xorder(vt, which="samples", vsample, 1)
 sampl
 }
 }

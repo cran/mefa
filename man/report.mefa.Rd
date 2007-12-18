@@ -37,6 +37,9 @@ When \code{tex = TRUE}, the result can be directly used in a LaTeX document by c
 \value{
 A text file named \code{filename} is written in the working directory.
 }
+\note{
+There is a bug concerning \code{biotic.data} ordering, will be fixed later.
+}
 \author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
 \seealso{
   \code{\link{mefa}}
@@ -47,7 +50,7 @@ data(landsnail, vhabitat, vsample, vtable)
 
 vt <- as.xcount(vtable, FALSE)
 spec <- xorder(vt, which="species", landsnail, 2)
-sampl <- xorder(vt, which="samples", vsample)
+sampl <- xorder(vt, which="samples", vsample, 1)
 vmf <- mefa(vt, sampl, spec)
 v2 <- strify(vmf, strata = "site.descr", which = "samples")
 habi <- xorder(v2, which="samples", vhabitat, 2)

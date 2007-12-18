@@ -6,7 +6,7 @@
 This function checks integrity of an object of class 'xcount' and an attribute table (data frame) by comparing row/column names (as sample/species identifiers) and values in an index column of the data frame.
 }
 \usage{
-check.attrib(xc, which = c("samples", "species"), attrib, index = 1)
+check.attrib(xc, which = c("samples", "species"), attrib, index = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,7 +16,7 @@ check.attrib(xc, which = c("samples", "species"), attrib, index = 1)
   \item{attrib}{data frame to be checked.}
   \item{index}{column identifier within \code{attrib} to be compared according to row/column names (as sample/species
     identifiers) of the 'xcount' object according to value of \code{which}. 
-    By default it is the first column of data frame \code{attrib}.}
+    By default, index = 0, and rownames are taken as identifiers.}
 }
 \value{
   \item{set.relation}{\code{"equal"} means the two sets (row/column names of the 'xcount' object and elements in the \code{index} column) are equal, \code{"inclusion"} means the two sets are inclusive and no missing elements found, \code{"intersect"} means the two sets intersect (required elements are listed in \code{missing}), \code{"separate"} means the two sets have no common elements (required elements are listed in \code{missing}).}
@@ -72,7 +72,7 @@ data(vtable, vsample, landsnail)
 vt <- as.xcount(vtable, FALSE)
 
 check.attrib(vt, which="species", landsnail, 2)
-check.attrib(vt, which="samples", vsample)
+check.attrib(vt, which="samples", vsample, 1)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
