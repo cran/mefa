@@ -76,7 +76,7 @@ data(landsnail, vsample, vtable)
 
 vt <- as.xcount(vtable, FALSE)
 spec <- xorder(vt, which="species", landsnail, 2)
-sampl <- xorder(vt, which="samples", vsample)
+sampl <- xorder(vt, which="samples", vsample, 1)
 
 vmf <- mefa(vt, sampl, spec)
 vmf
@@ -87,7 +87,7 @@ data(dol.count, dol.sample, landsnail)
 
 dmf <- mefa(
 dxc <- xcount(sscount(fill.count(dol.count), zc="zero.count")),
-xorder(dxc, which="samples", dol.sample),
+xorder(dxc, which="samples", dol.sample, 1),
 xorder(dxc, which="species", landsnail, 2)
 )
 

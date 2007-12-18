@@ -36,7 +36,7 @@ data(landsnail, vhabitat, vsample, vtable)
 
 v1 <- as.xcount(vtable, FALSE, segment="mixed")
 spec <- xorder(v1, which="species", landsnail, 2)
-sampl <- xorder(v1, which="samples", vsample)
+sampl <- xorder(v1, which="samples", vsample, 1)
 vmf <- mefa(v1, sampl, spec)
 
 v2 <- strify(vmf, strata = "site.descr", which = "samples")
