@@ -1,10 +1,12 @@
 `sscount` <-
-function(sstable, zc="NULL"){
+function(sstable, zc=NULL, fill=FALSE){
 if(ncol(as.data.frame(sstable)) < 3 | ncol(as.data.frame(sstable)) > 4) 
 stop("Three or four columns are required.")
-if(zc != "NULL") if(sum(is.element(sstable[,2], zc)) == 0) {
+if(is.null(zc) == FALSE) if(sum(is.element(sstable[,2], zc)) == 0) {
 cat("Samples with '", zc, "' were not detected, 'zc' is set to 'NULL'.\n")
-zc <- "NULL"}
+zc <- NULL}
+if(fill==TRUE) sstable <- fill.count(sstable)
+if(sum(is.na(sstable)) != 0) stop("NA values were detected")
 sample <- as.factor(sstable[,1])
 species <- as.factor(sstable[,2])
 if(ncol(sstable) == 3) {
@@ -20,7 +22,7 @@ count <- as.numeric(sstable[,4])}
 frame <- data.frame(sample, species, segment, count)
 frame[] <- lapply(frame, function(x) x[drop=TRUE])
 colnames(frame) <- c("sample", "species", "segment", "count")
-ifelse (zc == "NULL", nspecies <- nlevels(frame[,2]), nspecies <- nlevels(frame[,2]) - 1)
+if(is.null(zc)) {nspecies <- nlevels(frame[,2])} else {nspecies <- nlevels(frame[,2]) - 1}
 out <- list(data = frame, 
 zc = zc,
 nsamples = as.numeric(nlevels(frame[,1])),

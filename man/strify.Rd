@@ -45,6 +45,7 @@ v2
 check.attrib(v2, which="samples", vhabitat, 2)
 habi <- xorder(v2, which="samples", vhabitat, 2)
 vmf2 <- mefa(v2, habi, spec)
+vmf2
 
 v3 <- strify(vmf2, strata = "familia", which = "species")
 v3
@@ -53,3 +54,4 @@ v3
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}

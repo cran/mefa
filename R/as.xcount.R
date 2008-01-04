@@ -1,6 +1,11 @@
 `as.xcount` <-
 function (table, species.columns=TRUE, segment="unspecified"){
 #if(!is.integer(as.integer(as.matrix(table)))) stop("Count must be integer!")
+if(class(table) == "mefa") {
+    segment <- table$segment
+    table <- table$xcount
+    }
+if(sum(is.na(table)) != 0) stop("NA values were detected")
 if(species.columns == FALSE) table <- t(table)
 table <- table[order(rownames(table)), order(colnames(table))]
 out <- list(segment = segment,

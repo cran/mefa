@@ -11,7 +11,7 @@ ssc <- sscount(fill.count(dol.count), zc="zero.count")
 xc.broken <- xcount(ssc, 2)
 dmf <- mefa(
 dxc <- xcount(ssc),
-xorder(dxc, which="samples", dol.sample),
+xorder(dxc, which="samples", dol.sample, 1),
 xorder(dxc, which="species", landsnail, 2)
 )
 
@@ -53,16 +53,19 @@ plot(
 # taxonomy
 cat("\nCount data, sample and species attributes can be directly used \nin contingency tables.\n\n")
 wait()
-tax <- strify(strify(dmf, "microhabitat", "samples"), dmf$species.attr$familia, "species")$data
-print(tax<-tax[,c("Clausiliidae","Zonitidae","Helicidae")])
+tax <- exclmf(
+    strify(strify(dmf, "microhabitat", "samples"), dmf$species.attr$familia, "species"),
+    "species", c("Ellobiidae", "Endodontidae"))$data
+print(tax)
 print(chisq.test(tax, simulate.p.value = TRUE, B = 2000))
 
 # segments
 cat("\nSegments can be directly used to \nevaluate effects of subsetting.\n\n")
 wait()
-tax.broken <- strify(strify(xc.broken, dmf$sample.attr$microhabitat, "samples"),
-    dmf$species.attr$familia, "species")$data
-tax.broken<-tax.broken[,c("Clausiliidae","Zonitidae","Helicidae")]
+tax.broken <- exclmf(
+    strify(strify(xc.broken, dmf$sample.attr$microhabitat, "samples"),
+    dmf$species.attr$familia, "species"),
+    "species", c("Ellobiidae", "Endodontidae"))$data
 tax.m <- array(data=c(tax.broken, tax - tax.broken), dim=c(nrow(tax), ncol(tax), 2))
 dimnames(tax.m)<-list(rownames(tax), colnames(tax), c("Broken","Intact"))
 

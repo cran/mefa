@@ -1,5 +1,17 @@
 MEFA STABLE VERSIONS
 
+Version 1.0-3 -- ?????
+
+	* mefa object can be used in function as.xcount
+	* Default setting of index argument
+	  in add.attrib was changed.
+	* The "SampleReport" option is available 
+	  in mefadocs function, showing options for 
+	  Sweave report generation.
+	* Bug fixed in exclmf.
+	* Bug fixed in dolina demo.
+	* Warning message is placed in strify code.
+
 Version 1.0-2 -- December 18, 2007
 
 	* New function: exclmf,

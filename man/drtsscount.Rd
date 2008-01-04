@@ -10,8 +10,9 @@ drtsscount(table, sample, segment = "unspecified")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{table}{a data frame with count data.}
-  \item{sample}{a vector with same langth as number of rows in \code{table}. Used as factor for coding samples.}
+  \item{table}{a data frame with count data. \code{NA} values are not allowed.}
+  \item{sample}{a vector with same length as number of rows in \code{table}. Used as factor for coding samples.
+    \code{NA} values are not allowed.}
   \item{segment}{arbitrary name of the segment (eg. adult, juvenile, male, female), included in the table, 
     by default it is \code{"unspecified"}.}
 }
@@ -44,3 +45,4 @@ v2
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}

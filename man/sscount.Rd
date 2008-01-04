@@ -6,11 +6,14 @@
 The function makes an object of class 'sscount' from a data frame with columns for samples, species, count and optionally segment.
 }
 \usage{
-sscount(sstable, zc = "NULL")
+sscount(sstable, zc = NULL, fill = FALSE)
 }
 \arguments{
   \item{sstable}{dataframe with three or four columns. Columns must be in the order of sample, species, segment (optional) and count.}
   \item{zc}{identifier for samples with zero count, by default it is \code{"NULL"}. When non existing identifier is given, the value is set to default with warning.}
+  \item{fill}{logical, if \code{FALSE} (default), values in \code{sstable} will be left intact,
+     if \code{TRUE}, \code{\link{fill.count}} is used to replace \code{NA} values according to the 
+     last non-\code{NA} value in a given column of \code{sstable}}
 }
 \value{
 A result is an object of class 'sscount'.
@@ -49,9 +52,10 @@ sscount(ss[,c(1,2,4)], zc="zero.count")
 \dontrun{
 data(dol.count, dol.sample, landsnail)
 
-sscount(fill.count(dol.count), zc="zero.count")
+sscount(dol.count, zc="zero.count", fill=TRUE)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{classes}

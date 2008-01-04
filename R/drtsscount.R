@@ -1,10 +1,12 @@
 `drtsscount` <-
 function(table, sample, segment="unspecified"){
 #if(!is.integer(as.integer(as.matrix(table)))) stop("Count must be integer!")
-if(length(sample) != dim(table)[1]) stop("Dimensions are not the same.\n")
+if(length(sample) != dim(table)[1]) stop("Dimensions are not the same.")
+if(sum(is.na(table)) != 0) stop("NA values were detected")
+if(sum(is.na(sample)) != 0) stop("NA values were detected")
 table <- as.matrix(table)
 sample <- as.factor(sample)
-zc <- "NULL"
+zc <- NULL
 excl <- subset(table, apply(table, 1, sum) ==0)
 sample.excl <- subset(sample, apply(table, 1, sum) == 0)
 rexcl <- dim(excl)[1]
@@ -37,7 +39,12 @@ as.factor(data.out[,3]),
 as.numeric(data.out[,4]))
 colnames(data.fin) <- c("sample", "species", "segment", "count")
 data.fin[] <- lapply(data.fin, function(x) x[drop=TRUE])
-ifelse (zc == "NULL", nspecies <- nlevels(data.fin[,2]), nspecies <- nlevels(data.fin[,2]) - 1)
+
+if(is.null(zc)) {
+    nspecies <- nlevels(data.fin[,2])
+    } else {
+    nspecies <- nlevels(data.fin[,2]) - 1}
+
 out <- list(data = data.fin,
 zc = zc,
 nsamples = as.numeric(nlevels(data.fin[,1])),

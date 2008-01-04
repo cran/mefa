@@ -25,7 +25,7 @@ A result is an object of class 'sscount'.
   \item{segment.levels}{list of levels in data column \code{segment}.}
 }
 \note{
-Merge operation terminates with error message if zero count identifier of one 'sscount' object is a valid species identifier for the other 'sscount' object.
+Merge operation terminates with error message if zero count identifier of one 'sscount' object is a valid species identifier for the other 'sscount' object, and vica versa.
 }
 \author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
 \seealso{
@@ -54,3 +54,4 @@ msscount(ssc2, ssc2)
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}

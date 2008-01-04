@@ -10,7 +10,7 @@ ttsscount(table, species.columns = TRUE, segment = "unspecified")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{table}{a data frame.}
+  \item{table}{a data frame. \code{NA} values are not allowed.}
   \item{species.columns}{logical, if \code{TRUE} (default), species are columns, if \code{FALSE}, species are rows.}
   \item{segment}{arbitrary name of the segment (eg. adult, juvenile, male, female), included in the table, 
     by default it is \code{"unspecified"}.}
@@ -59,3 +59,4 @@ v3
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}

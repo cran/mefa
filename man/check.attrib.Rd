@@ -13,15 +13,16 @@ check.attrib(xc, which = c("samples", "species"), attrib, index = 0)
   \item{xc}{an object of class 'xcount'.}
   \item{which}{switch for rows (\code{"samples"}) or columns (\code{"species"}) of the 'xcount' object to be compared
     according to \code{index}.}
-  \item{attrib}{data frame to be checked.}
+  \item{attrib}{data frame to be checked. \code{NA} values are counted.}
   \item{index}{column identifier within \code{attrib} to be compared according to row/column names (as sample/species
     identifiers) of the 'xcount' object according to value of \code{which}. 
-    By default, index = 0, and rownames are taken as identifiers.}
+    By default, \code{index = 0}, and rownames are taken as identifiers.}
 }
 \value{
   \item{set.relation}{\code{"equal"} means the two sets (row/column names of the 'xcount' object and elements in the \code{index} column) are equal, \code{"inclusion"} means the two sets are inclusive and no missing elements found, \code{"intersect"} means the two sets intersect (required elements are listed in \code{missing}), \code{"separate"} means the two sets have no common elements (required elements are listed in \code{missing}).}
-  \item{duplicate}{a list of duplicate elements or \code{"NULL"}.}
-  \item{missing}{a list of missing elements or \code{"NULL"}.}
+  \item{duplicate}{a list of duplicate elements or \code{NULL}.}
+  \item{missing}{a list of missing elements or \code{NULL}.}
+  \item{na}{indicates the number of \code{NA} values in \code{attrib}.}
 }
 \author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
 \seealso{
@@ -78,4 +79,6 @@ check.attrib(vt, which="samples", vsample, 1)
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}
+
 

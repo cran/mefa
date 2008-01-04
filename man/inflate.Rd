@@ -38,3 +38,4 @@ inflate(ss[,1:3], rep(2, 6))
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}

@@ -1,5 +1,5 @@
 `mefadocs` <-
-function (doc = "changelog") 
+function (doc = c("ChangeLog","SampleReport")) 
 {
     doc <- match.arg(doc)
     if (length(grep(".pdf", doc)) > 0) {
