@@ -6,15 +6,17 @@
   defined in \code{\link{options}}.
 }
 \usage{
-mefadocs(doc = "changelog")
+mefadocs(doc = c("ChangeLog","SampleReport"))
 }
 \arguments{
   \item{doc}{The name of the document (partial match, case sensitive). }
 }
 \author{Peter Solymos adapted Jari Oksanen's \code{vegandocs} function in the 'vegan' package.}
+
 \examples{
 \dontrun{
-mefadocs("change")
+mefadocs("Change")
+mefadocs("Sample")
 }
 }
 \keyword{ utilities }

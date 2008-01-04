@@ -16,11 +16,11 @@ if(is.character(segment)) segment <- which(ssc$segment.levels == segment)
     }
     rct <- rownames(crosstable)
     cct <- colnames(crosstable)
-    crosstable.sub <- subset(crosstable, row.names(crosstable) != 
-        ssc$zc)
+    if(is.null(ssc$zc)) {crosstable.sub <- crosstable} else {
+        crosstable.sub <- subset(crosstable, row.names(crosstable) != ssc$zc)}
     out.data <- matrix(data = crosstable.sub, nrow = ssc$nspecies, 
         ncol = ssc$nsamples)
-    if (ssc$zc == "NULL") {
+    if (is.null(ssc$zc)) {
         rownames(out.data) <- rct
     }
     else {
@@ -28,8 +28,7 @@ if(is.character(segment)) segment <- which(ssc$segment.levels == segment)
         cat("Samples with '", ssc$zc, "' were detected.\n")
     }
     colnames(out.data) <- cct
-    out <- list(segment = segment.index, data = as.matrix(t(out.data)), 
-        nsamples = dim(out.data)[2], nspecies = dim(out.data)[1])
-    class(out) <- "xcount"
+
+    out <- as.xcount(out.data, species.columns=FALSE, segment=segment.index)
     return(out)
 }

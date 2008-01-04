@@ -39,7 +39,8 @@ ss
 
 fill.count(ss)
 
-sscount(fill.count(ss), zc="zero.count")
+sscount(fill.count(ss), zc="zero.count") ## equivalent as
+sscount(ss, zc="zero.count", fill=TRUE)
 
 ### Example 2: field data of the dolina
 
@@ -54,3 +55,4 @@ fill.count(dol.count)
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}

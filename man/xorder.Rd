@@ -24,6 +24,7 @@ A result is an object of class 'xorder'.
   \item{check.setrel}{\code{set.relation} value of function \code{\link{check.attrib}}.}
   \item{check.dupl}{\code{duplicate} value of function \code{\link{check.attrib}}.}
   \item{data}{data frame, ordered and subsetted according to the 'xcount' object.}
+  \item{na}{indicates the number of \code{NA} values in \code{data}.}
 }
 \author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
 \seealso{
@@ -80,3 +81,4 @@ sampl
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{classes}

@@ -12,7 +12,7 @@ function (xc, which = c("samples", "species"), attrib, index = 0)
 
 if(index == 0) {attr.i <- rownames(attrib)} else {attr.i <- attrib[, index]}
 
-    if (check2 != "NULL") 
+    if (is.null(check2) == FALSE) 
         stop("Duplicates were found by 'check.attrib': ", check2, 
             ".")
     if (check1 == "equal") {
@@ -42,7 +42,7 @@ if(index == 0) {attr.s <- rownames(attrib.sub)} else {attr.s <- attrib.sub[, ind
     rownames(attrib.out) <- index.out
     attrib.out <- as.data.frame(attrib.out)
     out <- list(which = which, check.setrel = check1, check.dupl = check2, 
-        data = attrib.out)
+        data = attrib.out, na = sum(is.na(attrib.out)))
     class(out) <- "xorder"
     return(out)
 }

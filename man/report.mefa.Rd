@@ -67,8 +67,14 @@ report.mefa("vspec-report.tex", vmf2,"species", c(3,2,4:7), "spec.name", "order"
 
 report.mefa("vsampl-report.tex", vmf2,"samples", c(3,2,4:7), "spec.name", "order", "author",
     TRUE, TRUE, sep = c(", "," (",")",",\n"))
+
+### Sweave example
+
+mefadocs("SampleReport")
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}
+\keyword{methods}

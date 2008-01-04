@@ -1,8 +1,8 @@
 `add.attrib` <-
-function(mf, which=c("samples", "species"), attrib, index=1){
+function(mf, which=c("samples", "species"), attrib, index=0){
 if(class(mf) != "mefa") stop("Object '",mf,"' is not of 'mefa' class.")
 xord <- xorder(as.xcount(mf$xcount), which, attrib, index)
-xord$data[[index]] <- NULL
+if(index != 0) xord$data[[index]] <- NULL
 if(which == "species") {
 xsamp.out <- mf$sample.attr
 xspec.out <- data.frame(mf$species.attr, xord$data)

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Merges Two Objects of Class 'xcount'}
 \description{
-The function merges two objects of class 'xcount'. Rows with zero total count are handled internally by functions \code{\link{msscount}} and \code{\link{ttsscount}}.
+The function merges two objects of class 'xcount'. Rows with zero total counts are handled internally by functions \code{\link{msscount}} and \code{\link{ttsscount}}.
 }
 \usage{
 mxcount(xc1, xc2, segment = "unspecified")
@@ -12,9 +12,9 @@ mxcount(xc1, xc2, segment = "unspecified")
 \arguments{
   \item{xc1}{an object of class 'xcount'.}
   \item{xc2}{an object of class 'xcount'.}
-  \item{segment}{arbitrary name of the segment (eg. all or mixed, when \code{segment} values of \code{xc1} 
-    and \code{xc2} are different) included in the table, 
-    by default it is \code{"unspecified"}.}
+  \item{segment}{arbitrary name of the segment (eg. all or mixed, see example). When \code{segment}
+    values of \code{xc1} and \code{xc2} are different, it is \code{"unspecified"} (as default).
+    If \code{segment} values of \code{xc1} and \code{xc2} are equal, \code{segment} is retained.}
 }
 \value{
 A result is an object of class 'xcount'.
@@ -58,3 +58,4 @@ mxcount(xc1, xc3)
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}

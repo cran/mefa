@@ -1,8 +1,9 @@
 `ttsscount` <-
 function(table, species.columns=TRUE, segment="unspecified"){
 #if(!is.integer(as.integer(as.matrix(table)))) stop("Count must be integer!")
+if(sum(is.na(table)) != 0) stop("NA values were detected")
 if(species.columns == FALSE) table <- t(table)
-zc <- "NULL"
+zc <- NULL
 excl <- subset(table, apply(table, 1, sum) ==0)
 incl <- subset(table, apply(table, 1, sum) > 0)
 incl <- t(incl)
@@ -40,7 +41,7 @@ as.factor(expanded[,3]),
 as.numeric(expanded[,4]))
 colnames(data.out) <- c("sample", "species", "segment", "count")
 data.out[] <- lapply(data.out, function(x) x[drop=TRUE])
-ifelse (zc == "NULL", nspecies <- nlevels(data.out[,2]), nspecies <- nlevels(data.out[,2]) - 1)
+if(is.null(zc)) {nspecies <- nlevels(data.out[,2])} else {nspecies <- nlevels(data.out[,2]) - 1}
 out <- list(data = data.out,
 zc = zc,
 nsamples = as.numeric(nlevels(data.out[,1])),

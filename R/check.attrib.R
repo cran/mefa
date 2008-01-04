@@ -19,7 +19,7 @@ if(index == 0) {list.in.attr <- rownames(attrib)} else {
 }
     if (length(union(list.in.xc, list.in.attr)) - nlevels(as.factor(list.in.xc)) - 
         nlevels(as.factor(list.in.attr)) == 0) {
-        duplicate <- "NULL"
+        duplicate <- NULL
         set.relation <- "separate"
         missing <- list.in.xc
     }
@@ -27,13 +27,13 @@ if(index == 0) {list.in.attr <- rownames(attrib)} else {
         match <- subset(list.in.attr, is.element(list.in.attr, 
             list.in.xc))
         if (sum(apply(table(match, match) > 1, 1, sum)) == 0) 
-            duplicate <- "NULL"
+            duplicate <- NULL
         else {
             duplicate <- subset(levels(as.factor(match)), apply(table(match, 
                 match) > 1, 1, sum) != 0)
         }
         if (length(intersect(list.in.xc, list.in.attr)) == length(list.in.xc)) {
-            missing <- "NULL"
+            missing <- NULL
             if (setequal(list.in.xc, list.in.attr) == TRUE) {
                 set.relation <- "equal"
             }
@@ -47,6 +47,6 @@ if(index == 0) {list.in.attr <- rownames(attrib)} else {
         }
     }
     out <- list(set.relation = set.relation, duplicate = duplicate, 
-        missing = missing)
+        missing = missing, na = sum(is.na(attrib)))
     return(out)
 }

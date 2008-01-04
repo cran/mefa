@@ -6,7 +6,7 @@
 The function adds attributes to an object ofclass 'mefa'.
 }
 \usage{
-add.attrib(mf, which = c("samples", "species"), attrib, index = 1)
+add.attrib(mf, which = c("samples", "species"), attrib, index = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -14,7 +14,8 @@ add.attrib(mf, which = c("samples", "species"), attrib, index = 1)
   \item{which}{attribute table within the 'mefa' object to be extended by new attributes, it can be the
     \code{"species"} and \code{"samples"} attribute table.}
   \item{attrib}{name of the data frame containing new attributes.}
-  \item{index}{column index of the data frame \code{attrib} containing new attributes, first column by default.}
+  \item{index}{column index of the data frame \code{attrib} containing new attributes, default (\code{index=0}) it 
+    refers to the rownames of the attribute table.}
 }
 \value{
 A result is an object of class 'mefa' containing the original and the new attributes as well. Index column from the new attributes table is removed, because it is a duplum.
@@ -48,6 +49,7 @@ sampletab2 <- as.data.frame(rbind(
 	c("sample2", "pecs", "tettye", "mecsek", "1956-10-23", "barna"),
 	c("sample1", "kiralyret", "bajdazoi", "bank", "2000-01-01", "XY"),
 	c("sample3", "budapest", "pest", "rottenbiller", "2007-10-03", "SP")))
+rownames(sampletab2)<-sampletab2[,1]
 colnames(sampletab2) <- c("sample", "locality1", "locality2", "locality3", "date", "collector")
 
 spectab <- as.data.frame(rbind(
@@ -64,7 +66,7 @@ xorder(xct, "samples", sampletab1, 1),
 xorder(xct, "species", spectab, 1)
 )
 
-mf2 <- add.attrib(mf, "samples", sampletab2, 1)
+mf2 <- add.attrib(mf, "samples", sampletab2)
 mf2
 
 ### Example 2: field data of Villany Hills
@@ -87,4 +89,5 @@ vmf2
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{manip}
+\keyword{utilities}
 
