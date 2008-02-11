@@ -1,6 +1,5 @@
 \name{strify}
 \alias{strify}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{Stratifies Object of Class 'xcount' or 'mefa'}
 \description{
 Stratifies an object of class 'xcount' or 'mefa' according to levels of a factor, or sample/species attribute, respectively.
@@ -8,22 +7,18 @@ Stratifies an object of class 'xcount' or 'mefa' according to levels of a factor
 \usage{
 strify(xc, strata, which = c("samples", "species"))
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{xc}{an object of class 'xcount' or 'mefa' to be stratified.}
   \item{strata}{a vector with length equal to the number of samples/species (according to \code{which} argument).
     For a 'mefa' object \code{strata} is a column within the samples/species attribute table (according to
     \code{which} argument).}
-  \item{which}{switch between rows (\code{"samples"}) and columns (\code{"species"}) to be stratified.}
+  \item{which}{switches between rows (\code{"samples"}) and columns (\code{"species"}) to be stratified.}
+}
+\details{
+If the original object is of class 'xcount', the result will be also of 'xcount'. I the original object is of class 'mefa', it must have at least one attribute table, that is not \code{NULL} (and not the same as stated by \code{which}), because the stratified attribute table will be \code{NULL} in the end. If both attribute tables are not \code{NULL}, the result will be of 'mefa', if the other attribute table is \code{NULL}, the result will be of 'xcount'. Sttatifying according to a \code{NULL} attribute table has no sense, and an error message is given. In this case use function \code{\link{as.xcount}}.
 }
 \value{
-A result is an object of class 'xcount'.
-  \item{segment}{segment of the original object.}
-  \item{data}{matrix containing count data of sample/species crosstabulation with dimensions according to
-    stratification. Total count value is the same for the new object, but counts within strata are summed
-    according to stratification.}
-  \item{nsamples}{number of rows (samples) in \code{data}.}
-  \item{nspecies}{number of columns (species) in \code{data}.}
+A result is an object of class 'xcount' of 'mefa'.
 }
 \author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
 \seealso{
@@ -40,18 +35,16 @@ sampl <- xorder(v1, which="samples", vsample, 1)
 vmf <- mefa(v1, sampl, spec)
 
 v2 <- strify(vmf, strata = "site.descr", which = "samples")
-v2
+v2 ## output is 'mefa'
 
-check.attrib(v2, which="samples", vhabitat, 2)
-habi <- xorder(v2, which="samples", vhabitat, 2)
-vmf2 <- mefa(v2, habi, spec)
-vmf2
+v3 <- strify(v2, strata = "familia", which = "species")
+v3 ## output is 'xcount'
 
-v3 <- strify(vmf2, strata = "familia", which = "species")
-v3
+check.attrib(as.xcount(v2), which="samples", vhabitat, 2)
+habi <- xorder(as.xcount(v2), which="samples", vhabitat, 2)
+vmf2 <- mefa(as.xcount(v2), habi, spec)
+vmf2 ## 'mefa' again with attributes
 }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{manip}
 \keyword{utilities}

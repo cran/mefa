@@ -1,6 +1,11 @@
 MEFA STABLE VERSIONS
 
-Version 1.0-3 -- ?????
+Version 1.0-4 -- ???, 2008
+
+	* digits argument is placed into sscount 
+	  and related functions.
+
+Version 1.0-3 -- January 4, 2008
 
 	* mefa object can be used in function as.xcount
 	* Default setting of index argument

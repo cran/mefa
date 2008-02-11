@@ -13,7 +13,7 @@ if(length(biotic.data) == 4) sort <- order(loc[,1], loc[,2], loc[,3], loc[,4])
 if(length(biotic.data) == 5) sort <- order(loc[,1], loc[,2], loc[,3], loc[,4], loc[,5])
 if(length(biotic.data) == 6) sort <- order(loc[,1], loc[,2], loc[,3], loc[,4], loc[,5], loc[,6])
 loc <- as.matrix(loc[order(sort),])
-xcr <- mf$xcount[order(sort),order(mf$species.attr[,species.order])]
+xcr <- mf$data[order(sort),order(mf$species.attr[,species.order])]
 nam <- as.vector(mf$species.attr)[,species.name][order(mf$species.attr[,species.order])]
 if(author != 0) autv <- as.vector(mf$species.attr)[,author][order(mf$species.attr[,species.order])]
 ti <- "\textit{"

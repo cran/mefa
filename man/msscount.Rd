@@ -15,21 +15,13 @@ msscount(ssc1, ssc2)
 }
 \value{
 A result is an object of class 'sscount'.
-  \item{data}{data frame with columns \code{sample}, \code{species}, \code{segment}, \code{count}.
-    First three columns are factors, \code{count} is numeric.}
-  \item{zc}{flag for rows with 0 total count, \code{zc="zero.count"}. Different \code{zc} flags for
-    \code{ssc1} and \code{ssc2} are united.}
-  \item{nsamples}{number of samples (levels) in data column \code{sample}.}
-  \item{nspecies}{number of species (levels) in data column \code{species}, 
-    "pseudo-species" created according to \code{zc} is excluded.}
-  \item{segment.levels}{list of levels in data column \code{segment}.}
 }
 \note{
 Merge operation terminates with error message if zero count identifier of one 'sscount' object is a valid species identifier for the other 'sscount' object, and vica versa.
 }
 \author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
 \seealso{
-  \code{\link{sscount}}
+  \code{\link{sscount}}, \code{\link{xcount}}
 }
 \examples{
 ss <- data.frame(

@@ -6,7 +6,7 @@ function (xc, which = c("samples", "species"), excl, empty = FALSE)
     if (class(xc) == "xcount") 
         matr <- xc$data
     if (class(xc) == "mefa") 
-        matr <- xc$xcount
+        matr <- xc$data
     if (which == "species") 
         matr <- t(matr)
     if (empty == FALSE) 
