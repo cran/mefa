@@ -11,6 +11,9 @@ mefadocs(doc = c("ChangeLog","SampleReport"))
 \arguments{
   \item{doc}{The name of the document (partial match, case sensitive). }
 }
+\details{
+\code{"ChangeLog"} containss version history, \code{"SampleReport"} shows an example LaTeX document how to use \code{\link{report.mefa}} to prepare \code{\link{Sweave}} reports based on faunistic data.
+}
 \author{Peter Solymos adapted Jari Oksanen's \code{vegandocs} function in the 'vegan' package.}
 
 \examples{

@@ -19,6 +19,7 @@ check.attrib(xc, which = c("samples", "species"), attrib, index = 0)
     By default, \code{index = 0}, and rownames are taken as identifiers.}
 }
 \value{
+  \item{call}{returns the call.}
   \item{set.relation}{\code{"equal"} means the two sets (row/column names of the 'xcount' object and elements in the \code{index} column) are equal, \code{"inclusion"} means the two sets are inclusive and no missing elements found, \code{"intersect"} means the two sets intersect (required elements are listed in \code{missing}), \code{"separate"} means the two sets have no common elements (required elements are listed in \code{missing}).}
   \item{duplicate}{a list of duplicate elements or \code{NULL}.}
   \item{missing}{a list of missing elements or \code{NULL}.}

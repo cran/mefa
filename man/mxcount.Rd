@@ -12,16 +12,13 @@ mxcount(xc1, xc2, segment = "unspecified")
 \arguments{
   \item{xc1}{an object of class 'xcount'.}
   \item{xc2}{an object of class 'xcount'.}
-  \item{segment}{arbitrary name of the segment (eg. all or mixed, see example). When \code{segment}
-    values of \code{xc1} and \code{xc2} are different, it is \code{"unspecified"} (as default).
-    If \code{segment} values of \code{xc1} and \code{xc2} are equal, \code{segment} is retained.}
+  \item{segment}{arbitrary name of the segment (eg. all or mixed, see example). 
+    When \code{segment} values of \code{xc1} and \code{xc2} are the same, \code{segment} argument specified here 
+    has no effect and the original is retained. When \code{segment} values of \code{xc1} and \code{xc2} are different, 
+    it is set to \code{"unspecified"} as default.}
 }
 \value{
 A result is an object of class 'xcount'.
-  \item{segment}{value of the \code{segment} argument.}
-  \item{data}{matrix containing merged count data of sample/species crosstabulation.}
-  \item{nsamples}{number of rows (samples) in \code{data}.}
-  \item{nspecies}{number of columns (species) in \code{data}.}
 }
 \author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
 \seealso{

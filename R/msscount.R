@@ -3,13 +3,16 @@ function(ssc1, ssc2){
 if(class(ssc1) != "sscount" | class(ssc2) != "sscount") stop("Objects must be of 'sscount' class.")
 zzc <- NULL
 
-if(is.null(ssc1$zc) == FALSE & is.null(ssc2$zc) == FALSE)
+if(is.null(ssc1$digits) & is.null(ssc2$digits)) {
+	digits <- NULL} else {
+	digits <- max(ssc1$digits, ssc2$digits)}
 
-{if(ssc1$zc != ssc2$zc) cat("Different 'zero.count' indicators were united.\n")
-if(sum(is.element(subset(ssc1$data$species, ssc1$data$species != ssc1$zc), ssc2$zc)) != 0)
-stop("Zero count identifier was detected for not zero count sample!")
-if(sum(is.element(subset(ssc2$data$species, ssc2$data$species != ssc2$zc), ssc1$zc)) != 0)
-stop("Zero count identifier was detected for not zero count sample!")}
+if(!is.null(ssc1$zc) & !is.null(ssc2$zc))
+	{if(ssc1$zc != ssc2$zc) cat("Different 'zero.count' indicators were united.\n")
+	if(sum(is.element(subset(ssc1$data$species, ssc1$data$species != ssc1$zc), ssc2$zc)) != 0)
+	stop("Zero count identifier was detected for not zero count sample!")
+	if(sum(is.element(subset(ssc2$data$species, ssc2$data$species != ssc2$zc), ssc1$zc)) != 0)
+	stop("Zero count identifier was detected for not zero count sample!")}
 
 if(is.null(ssc1$zc)) {ssc1.sub <- ssc1$data} else {
 ssc1.sub <- subset(ssc1$data, ssc1$data$species != ssc1$zc)}
@@ -39,17 +42,17 @@ data.out[start2:rows.sub,2] <- as.character(ssc2.sub[,2])
 data.out[start2:rows.sub,3] <- as.character(ssc2.sub[,3])
 data.out[start2:rows.sub,4] <- as.numeric(ssc2.sub[,4])
 
-if(is.null(ssc1$zc) == FALSE){
+if(!is.null(ssc1$zc)){
 data.out[start.zc1:stop.zc1,1] <- as.character(ssc1.zc)
 data.out[start.zc1:stop.zc1,2] <- as.character("zero.count")
-data.out[start.zc1:stop.zc1,3] <- as.character("unspecified")
+data.out[start.zc1:stop.zc1,3] <- as.character("zero.count")
 data.out[start.zc1:stop.zc1,4] <- as.numeric(1)
 zzc <- "zero.count"}
 
-if(is.null(ssc2$zc) == FALSE){
+if(!is.null(ssc2$zc)){
 data.out[start.zc2:rows.out,1] <- as.character(ssc2.zc)
 data.out[start.zc2:rows.out,2] <- as.character("zero.count")
-data.out[start.zc2:rows.out,3] <- as.character("unspecified")
+data.out[start.zc2:rows.out,3] <- as.character("zero.count")
 data.out[start.zc2:rows.out,4] <- as.numeric(1)
 zzc <- "zero.count"}
 
@@ -59,13 +62,9 @@ as.factor(data.out[,2]),
 as.factor(data.out[,3]),
 as.numeric(data.out[,4]))
 colnames(data.fin) <- c("sample", "species", "segment", "count")
-data.fin[] <- lapply(data.fin, function(x) x[drop=TRUE])
-if(is.null(ssc1$zc)) {nspecies <- nlevels(data.fin[,2])} else {nspecies <- nlevels(data.fin[,2]) - 1}
-out <- list(data = as.data.frame(data.fin), 
-zc = zzc,
-nsamples = as.numeric(nlevels(data.fin[,1])),
-nspecies = as.numeric(nspecies),
-segment.levels = levels(data.fin[,3]))
-class(out) <- "sscount"
+
+out <- sscount(data.fin, zc = zzc, digits=digits)
+out$call <- match.call()
+
 return(out)}
 

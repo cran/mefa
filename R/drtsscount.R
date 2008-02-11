@@ -1,10 +1,18 @@
 `drtsscount` <-
-function(table, sample, segment="unspecified"){
+function(table, sample, segment="unspecified", digits=NULL){
 #if(!is.integer(as.integer(as.matrix(table)))) stop("Count must be integer!")
 if(length(sample) != dim(table)[1]) stop("Dimensions are not the same.")
 if(sum(is.na(table)) != 0) stop("NA values were detected")
 if(sum(is.na(sample)) != 0) stop("NA values were detected")
 table <- as.matrix(table)
+
+if(is.null(digits)) if(sum(table) != sum(trunc(table)))
+    stop("count is not integer, use 'digits' argument")
+
+if(!is.null(digits)) if(sum(table) != sum(trunc(table))) {
+    table <- round(table, digits = digits)
+    } else {digits <- NULL}
+
 sample <- as.factor(sample)
 zc <- NULL
 excl <- subset(table, apply(table, 1, sum) ==0)
@@ -37,19 +45,14 @@ as.factor(data.out[,1]),
 as.factor(data.out[,2]),
 as.factor(data.out[,3]),
 as.numeric(data.out[,4]))
-colnames(data.fin) <- c("sample", "species", "segment", "count")
-data.fin[] <- lapply(data.fin, function(x) x[drop=TRUE])
 
 if(is.null(zc)) {
     nspecies <- nlevels(data.fin[,2])
     } else {
     nspecies <- nlevels(data.fin[,2]) - 1}
 
-out <- list(data = data.fin,
-zc = zc,
-nsamples = as.numeric(nlevels(data.fin[,1])),
-nspecies = as.numeric(nspecies),
-segment.levels = levels(as.factor(data.fin[,3])))
-class(out) <- "sscount"
+out <- sscount(data.fin, zc=zc, fill=FALSE, digits=digits)
+out$call <- match.call()
+
 return(out)}
 

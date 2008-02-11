@@ -1,12 +1,14 @@
 \name{xorder}
 \alias{xorder}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{print.xorder}
 \title{Makes Object of Class 'xorder'}
 \description{
 The function makes an object of class 'xorder' from an attribute table (data frame) based on comparison with an 'xcount' object. Data frame subsetting is made according to results of function \code{\link{check.attrib}}.
 }
 \usage{
 xorder(xc, which = c("samples", "species"), attrib, index = 0)
+
+\method{print}{xorder}(x, \dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -17,14 +19,17 @@ xorder(xc, which = c("samples", "species"), attrib, index = 0)
   \item{index}{column identifier within \code{attrib} to be compared according to row/column names (as sample/species
     identifiers) of the 'xcount' object according to value of \code{which}. 
     By default, index = 0, and rownames are taken as identifiers.}
+  \item{x}{an object of class 'xorder'.}
+  \item{...}{other arguments.}
+
 }
 \value{
 A result is an object of class 'xorder'.
+  \item{data}{data frame, ordered and subsetted according to the 'xcount' object.}
+  \item{call}{returns the call.}
   \item{which}{the value of the \code{which} argument, either \code{"samples"} or \code{"species"}.}
   \item{check.setrel}{\code{set.relation} value of function \code{\link{check.attrib}}.}
-  \item{check.dupl}{\code{duplicate} value of function \code{\link{check.attrib}}.}
-  \item{data}{data frame, ordered and subsetted according to the 'xcount' object.}
-  \item{na}{indicates the number of \code{NA} values in \code{data}.}
+  \item{na}{indicates the number of \code{NA} values in \code{attrib}.}
 }
 \author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
 \seealso{
@@ -78,7 +83,5 @@ sampl <- xorder(vt, which="samples", vsample, 1)
 sampl
 }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{manip}
 \keyword{classes}

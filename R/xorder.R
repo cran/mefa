@@ -12,7 +12,7 @@ function (xc, which = c("samples", "species"), attrib, index = 0)
 
 if(index == 0) {attr.i <- rownames(attrib)} else {attr.i <- attrib[, index]}
 
-    if (is.null(check2) == FALSE) 
+    if (!is.null(check2)) 
         stop("Duplicates were found by 'check.attrib': ", check2, 
             ".")
     if (check1 == "equal") {
@@ -41,8 +41,29 @@ if(index == 0) {attr.s <- rownames(attrib.sub)} else {attr.s <- attrib.sub[, ind
     }
     rownames(attrib.out) <- index.out
     attrib.out <- as.data.frame(attrib.out)
-    out <- list(which = which, check.setrel = check1, check.dupl = check2, 
-        data = attrib.out, na = sum(is.na(attrib.out)))
+
+out <- list(
+    data = attrib.out, 
+    call = match.call(),
+    which = which,
+    check.setrel = check1,
+    na = sum(is.na(attrib.out))
+    )
+    
     class(out) <- "xorder"
     return(out)
+}
+
+### print function for xorder
+print.xorder <- function(x, ...) {
+	cat("Object of class 'xorder'\n")
+	cat("Call: ")
+	print(x$call)
+	cat("Attribute table for ")
+		if(x$which == "samples") cat("samples\n") else cat("species\n")
+	cat("Match of 'xcount' object and attribute table: ", x$check.setrel, "\n")
+	cat("Attribute table contains ", ncol(x$data), "variables for", nrow(x$data))
+	if(x$which == "samples") cat(" samples\n") else cat(" species\n")
+	if(x$na == 0) 
+		cat("NA values were not found in the table\n") else cat("Number of NA values in the table: ", x$na,"\n")
 }

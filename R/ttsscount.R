@@ -1,9 +1,16 @@
 `ttsscount` <-
-function(table, species.columns=TRUE, segment="unspecified"){
-#if(!is.integer(as.integer(as.matrix(table)))) stop("Count must be integer!")
+function(table, species.columns=TRUE, segment="unspecified", digits=NULL){
 if(sum(is.na(table)) != 0) stop("NA values were detected")
 if(species.columns == FALSE) table <- t(table)
 zc <- NULL
+
+if(is.null(digits)) if(sum(table) != sum(trunc(table)))
+    stop("count is not integer, use 'digits' argument")
+
+if(!is.null(digits)) if(sum(table) != sum(trunc(table))) {
+    table <- round(table, digits = digits)
+    } else {digits <- NULL}
+
 excl <- subset(table, apply(table, 1, sum) ==0)
 incl <- subset(table, apply(table, 1, sum) > 0)
 incl <- t(incl)
@@ -39,14 +46,9 @@ as.factor(expanded[,1]),
 as.factor(expanded[,2]),
 as.factor(expanded[,3]),
 as.numeric(expanded[,4]))
-colnames(data.out) <- c("sample", "species", "segment", "count")
-data.out[] <- lapply(data.out, function(x) x[drop=TRUE])
-if(is.null(zc)) {nspecies <- nlevels(data.out[,2])} else {nspecies <- nlevels(data.out[,2]) - 1}
-out <- list(data = data.out,
-zc = zc,
-nsamples = as.numeric(nlevels(data.out[,1])),
-nspecies = as.numeric(nspecies),
-segment.levels = levels(as.factor(data.out[,3])))
-class(out) <- "sscount"
+
+out <- sscount(data.out, zc=zc, fill=FALSE, digits=digits)
+out$call <- match.call()
+
 return(out)}
 

@@ -46,7 +46,13 @@ if(index == 0) {list.in.attr <- rownames(attrib)} else {
             missing <- setdiff(list.in.xc, list.in.attr)
         }
     }
-    out <- list(set.relation = set.relation, duplicate = duplicate, 
-        missing = missing, na = sum(is.na(attrib)))
+    
+    out <- list(
+        call=match.call(), 
+        set.relation = set.relation, 
+        duplicate = duplicate, 
+        missing = missing, 
+        na = sum(is.na(attrib))
+        )
     return(out)
 }

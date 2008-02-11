@@ -1,79 +1,228 @@
-cat("This is the demo for the R package 'mefa'.\n\n")
-
-library(mefa)
-data(dol.count, dol.sample, landsnail)
-
-wait <- function() {
-input <- readline("Please press ENTER to contimue... ")
+wait <- function(vign=FALSE) {
+  if (vign) {
+    ANSWER <- readline("Do you want to open the vignette now? ")
+    if (substr(tolower(ANSWER), 1, 1) == "y")
+      vignette("mefa-vignette")
+  } else {
+    ANSWER <- readline("Please press ENTER to contimue ... ")
+  }
 }
 
-ssc <- sscount(fill.count(dol.count), zc="zero.count")
-xc.broken <- xcount(ssc, 2)
-dmf <- mefa(
-dxc <- xcount(ssc),
-xorder(dxc, which="samples", dol.sample, 1),
-xorder(dxc, which="species", landsnail, 2)
+########################################################
+###          Demo for the R package 'mefa'           ###
+########################################################
+
+########################################################
+###         Processing count data with 'mefa'        ###
+########################################################
+
+### loading 'mefa' library
+library(mefa)
+
+wait()
+### loading count data to use
+data(dol.count)
+str(dol.count)
+
+wait()
+### notebook style count data
+
+dol.count[1:10,]
+
+wait()
+### object of class 'sscount' based on dol.count
+
+(ssc <- sscount(dol.count, zc="zero.count", fill=TRUE))
+
+wait()
+### with data filled up
+
+ssc$data[1:10,]
+
+wait()
+### object of class 'xcount' based on ssc
+### for all segments
+
+(xc.all <- xcount(ssc))
+
+wait()
+### and for broken shells only
+
+(xc.broken <- xcount(ssc, 2))
+
+wait()
+### 
+
+plot(xc.all, col="red")
+
+wait()
+### 
+
+plot(xc.all, type="rank", col="red")
+
+wait()
+### loading sample attribute table
+
+data(dol.sample)
+str(dol.sample)
+
+wait()
+### check compatibility of xc.all and dol.sample
+
+check.attrib(xc.all, which = "samples", dol.sample, 1)
+
+wait()
+### object of class 'xorder' for sample attributes
+
+(xo1 <- xorder(xc.all, which="samples", dol.sample, 1))
+
+wait()
+### loading species attribute table
+
+data(landsnail)
+str(landsnail)
+
+wait()
+### check compatibility of xc.all and landsnail
+
+check.attrib(xc.all, which = "species", landsnail, 2)
+
+wait()
+### object of class 'xorder' for species attributes
+
+(xo2 <- xorder(xc.all, which="species", landsnail, 2))
+
+wait()
+### object of class 'mefa' combining xc.all, xo1 and xo2
+
+(mf <- mefa(xc.all, xo1, xo2))
+
+wait()
+### 
+
+plot(mf, "microhabitat", "shell.dimension", col="red")
+
+wait()
+###
+
+(mic <- strify(mf, "microhabitat", "samples"))
+
+wait()
+###
+
+(fam <- strify(mf, "familia", "species"))
+
+wait()
+###
+
+(mic.fam <- strify(
+  as.xcount(mic), mf$species.attr$familia, "species")
 )
 
-# litter transect
-cat("\nCount data and sample attributes can be directly used for plotting.\n\n")
 wait()
-par(mfrow=c(1,2), pty="s")
-plot(apply(subset(dmf$xcount, dmf$sample.attr$microhabitat == "litter"), 1, sum)
-    ~ subset(dmf$sample.attr[,3], dmf$sample.attr$microhabitat == "litter"),
-    ylab="Abundance", xlab="Transect position", type="b", col="red",
-    main="Litter transect along the dolina", sub="1-7: south to north aspect")
-plot(apply(subset(dmf$xcount, dmf$sample.attr$microhabitat == "litter") > 0, 1, sum)
-    ~ subset(dmf$sample.attr[,3], dmf$sample.attr$microhabitat == "litter"),
-    ylab="Species richness", xlab="Transect position", type="b", col="red",
-    sub="1-7: south to north aspect")
-par(mfrow=c(1,1))
+###
 
-# linear model
-cat("\nCount data and sample attributes can be directly used for \nunivariate modelling.\n\n")
+mic.fam$data
+
 wait()
-print(
-    summary(lm(apply(dmf$xcount > 0, 1, sum) ~ dmf$sample.attr$microhabitat -1))
-    )
+###
 
-# boxplot
+(ex1 <- exclmf(mf, which = "samples", empty = TRUE, 
+        excl = which(mf$sample.attr$microhabitat != "litter")))
+
 wait()
-boxplot(
-    apply(dmf$xcount > 0, 1, sum)
-    ~ dmf$sample.attr$microhabitat,
-    main="", ylab="Species Richness", xlab="Microhabitats", col="red")
+###
 
-# cluster
-cat("\nCount data and sample attributes can be directly used for \nmultivariate analyses.\n\n")
+plot(ex1, "replicate", type="b", col="red")
+
+wait()
+###
+
+(ex2 <- exclmf(
+  mic.fam, "species", c("Ellobiidae", "Endodontidae"), empty = TRUE)
+)
+
+wait()
+### let's see the structure of a 'mefa' object
+
+str(ex2)
+
+wait()
+########################################################
+###      Data analysis based on 'mefa' objects       ###
+########################################################
+
+wait()
+###*****************************************************
+### What is the effect of microhabitat on species richness?
+
+wait()
+### linear modeling indicates:
+### microhabitat effect is significant,
+### richness is higher in the rock
+### and dead wood microsites
+
+summary(lm(mf$srichn ~ mf$sample.attr$microhabitat -1))
+
+wait()
+###*****************************************************
+### What is the similarity relationship among the samples?
+
+### hierarchical cluster dendrogram indicates:
+### rock samples have the most distinct species composition
+
 wait()
 plot(
-    hclust(dist(dmf$xcount, "euclidean"), "ward"),
-    sub="Euclidean distance, Ward's method", main="Cluster dendrogram of abundance data",xlab="")
+  hclust(dist(mf$data, "euclidean"), "ward"),
+  sub="Euclidean distance, Ward's method",
+  main="Cluster dendrogram of abundance data",xlab=""
+)
 
-# taxonomy
-cat("\nCount data, sample and species attributes can be directly used \nin contingency tables.\n\n")
 wait()
-tax <- exclmf(
-    strify(strify(dmf, "microhabitat", "samples"), dmf$species.attr$familia, "species"),
-    "species", c("Ellobiidae", "Endodontidae"))$data
-print(tax)
-print(chisq.test(tax, simulate.p.value = TRUE, B = 2000))
+###*****************************************************
+### Is there any microhabitat preferences 
+### for land snail families?
 
-# segments
-cat("\nSegments can be directly used to \nevaluate effects of subsetting.\n\n")
 wait()
-tax.broken <- exclmf(
-    strify(strify(xc.broken, dmf$sample.attr$microhabitat, "samples"),
-    dmf$species.attr$familia, "species"),
-    "species", c("Ellobiidae", "Endodontidae"))$data
-tax.m <- array(data=c(tax.broken, tax - tax.broken), dim=c(nrow(tax), ncol(tax), 2))
-dimnames(tax.m)<-list(rownames(tax), colnames(tax), c("Broken","Intact"))
+### the data
 
-par(mfrow=c(1,2), pty="s")
-barplot(t(tax.m[,,1]),horiz = TRUE,col=heat.colors(3),
-    main="Broken", xlab="Frequency")
-barplot(t(tax.m[,,2]),horiz = TRUE,col=heat.colors(3),
-    main="Intact", xlab="Frequency", legend.text=TRUE)
+ex2$data
+
+wait()
+### the Chi-squared test indicates:
+### the association is significant
+
+chisq.test(ex2$data, simulate.p.value = TRUE, B = 2000)
+
+wait()
+###*****************************************************
+### What is the effect of different life stages
+### on interpretation of the results?
+
+wait()
+### making the 'broken' part
+
+broken <- exclmf(
+  strify(strify(xc.broken, mf$sample.attr$microhabitat, "samples"),
+    mf$species.attr$familia, "species"),
+    "species", c("Ellobiidae", "Endodontidae"))$data
+
+wait()
+### barplot for comparison
+
+par(mfrow=c(1, 2), pty="s")
+barplot(t(broken), horiz=TRUE, col=heat.colors(3), main="Broken", xlab="Frequency")
+barplot(t(ex2$data), horiz = TRUE, col=heat.colors(3), main="Intact", xlab="Frequency", legend.text=TRUE)
 par(mfrow=c(1,1))
 
-cat("\nEnd of 'mefa' demo.\n\n")
+wait()
+########################################################
+###      To use 'mefa' for reporting, see            ###
+###      - help on the function report.mefa          ###
+###      - and mefadocs("SampleReport")              ###
+########################################################
+
+wait()
+###              End of 'mefa' demo
+
+wait()

@@ -1,34 +1,55 @@
 \name{mefa}
 \alias{mefa}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{print.mefa}
+\alias{plot.mefa}
 \title{Makes Object of Class 'mefa'}
 \description{
-Makes and object of class 'mefa' from az 'xcont' and sample and species attribute 'xorder' objects.
+Makes and object of class 'mefa' from az 'xcont' and sample and species attribute 'xorder' objects. Incomplete 'mea' object can becreated, when one out of samples or species attributes is missing.
 }
 \usage{
 mefa(xc, xorder.samples, xorder.species)
+
+\method{print}{mefa}(x, \dots)
+
+\method{plot}{mefa}(x, sample.var = NULL, species.var = NULL, \dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{xc}{object of class 'xcount'.}
-  \item{xorder.samples}{object of class 'xorder' for sample attributes.}
-  \item{xorder.species}{object of class 'xorder' for species attributes.}
+  \item{xorder.samples}{object of class 'xorder' for sample attributes, or \code{NULL}.}
+  \item{xorder.species}{object of class 'xorder' for species attributes, or \code{NULL}.}
+  \item{x}{an object of class 'mefa'.}
+  \item{sample.var}{column index (numeric or character) of the sample attribute table to plot as independent variable.}
+  \item{species.var}{column index (numeric or character) of the species attribute table to plot as independent variable.}
+  \item{...}{other arguments.}
+}
+\details{
+The \code{plot} method works as for 'xcount' objects if only a 'mefa' object is specified. If sample and species attributes (one or both) are also specified, scatterplots or box-and-whiskers diagrams are drawn, based on the type of the independent variable. Species richness, number of individuals, abundance and number of species occurrences are plotted as response variable. If the crosstable is binary, only richness and occurences are used.
 }
 \value{
 A result is an object of class 'mefa'.
-  \item{segment}{segment of the 'xcount' object.}
-  \item{xcount}{count data from the 'xcount' object}
+  \item{data}{count data from the 'xcount' object.}
   \item{sample.attr}{data frame containing data of 'xorder' object containing sample attributes.}
   \item{species.attr}{data frame containing data of 'xorder' object containing species attributes.}
-  \item{nsamples}{number of samples.}
-  \item{nspecies}{number of species.}
-  \item{totalcount}{total number of counts in \code{xcount}.}
-  \item{nsample.attr}{number of sample attribute columns in \code{sample.attr}.}
-  \item{nspecies.attr}{number of species attribute columns in \code{species.attr}.}
+  \item{call}{returns the call.}
+  \item{segment}{segment of the 'xcount' object.}
+  \item{digits}{digits of the 'xcount' object.}
+  \item{nsamples}{number of rows (samples) in \code{data}.}
+  \item{nspecies}{number of columns (species) in \code{data}.}
+  \item{totalcount}{sum of count or measurement in \code{data}.}
+  \item{presences}{sum of presences in \code{data}.}
+  \item{ninds}{a vector, containing number of individuals (or sum of measurement values) within samples.}
+  \item{srichn}{a vector, containing number of species (based on occurences) within samples.}
+  \item{specabund}{a vector, containing number of individuals (or sum of measurement values) within species.}
+  \item{specoccur}{a vector, containing number of occurences within species.}
+  \item{attributes}{character, indicating the presence of \code{"both"} or only one 
+    (\code{"samples.only"} or \code{"species.only"}) attribute tables.}
+  \item{attrib.matrix}{a matrix with 2 rows and 3 columns. Columns contain \code{check.setrel},
+    number of variables and \code{na} from 'xcount' objects for samples (first row) and species 
+    (second row). If one 'xorder' object is missing, respective row contains \code{NA}s.}
 }
 \author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
 \seealso{
-  \code{\link{check.attrib}}, \code{\link{sscount}}, \code{\link{xcount}}, \code{\link{xorder}}
+  \code{\link{check.attrib}}, \code{\link{marmat}}, \code{\link{sscount}}, \code{\link{xcount}}, \code{\link{xorder}}
 }
 \examples{
 ### Example 1: simple atrificial data
@@ -81,6 +102,12 @@ sampl <- xorder(vt, which="samples", vsample, 1)
 vmf <- mefa(vt, sampl, spec)
 vmf
 
+plot(vmf)
+plot(vmf,type="rank")
+plot(vmf, 3)
+plot(vmf, NULL, 5)
+plot(vmf, "site.descr", "shell.dimension")
+
 ### Example 3: field data of the dolina
 
 data(dol.count, dol.sample, landsnail)
@@ -92,9 +119,9 @@ xorder(dxc, which="species", landsnail, 2)
 )
 
 dmf
+
+plot(dmf, "microhabitat", "shell.dimension")
 }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{manip}
 \keyword{classes}

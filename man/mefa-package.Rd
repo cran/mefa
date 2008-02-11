@@ -24,8 +24,8 @@ Utility functions are provided to check and manipulate objects.
 \tabular{ll}{
 Package: \tab mefa\cr
 Type: \tab Package\cr
-Version: \tab 1.0-3\cr
-Date: \tab 2008-01-04\cr
+Version: \tab 1.0-4\cr
+Date: \tab 2008-02-11\cr
 License: \tab GPL-2\cr
 }
 }
