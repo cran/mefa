@@ -1,6 +1,23 @@
-`mefa` <-
-function(xc, xorder.samples, xorder.species){
+as.mefa <- 
+function(x, n=NULL, ...){
+mfl <- x
+if(!inherits(mfl,"mflist")) stop("Object is not of class 'mflist'.")
+if (!is.null(n)) xc <- mfl$data[[n]]$data
+if (is.null(n)) {
+    xc <- mfl$data[[1]]$data
+    for (i in 2:mfl$length) xc <- xc + mfl$data[[i]]$data
+    }
+xc <- as.xcount(xc)
+if(is.null(mfl$sample.attr)) xo1 <- NULL else xo1 <- xorder(xc, "samples", mfl$sample.attr)
+if(is.null(mfl$species.attr)) xo2 <- NULL else xo2 <- xorder(xc, "species", mfl$species.attr)
+return(mefa(xc, xo1, xo2))}
 
+
+
+`mefa` <-
+function(xc, xorder.samples, xorder.species, n = 1){
+
+if(class(xc)=="xclist") mf <- as.xcount(xc,n)
 if(class(xc) != "xcount") stop("Object '",xc,"' is not of 'xcount' class.")
 
 if(is.null(xorder.samples) & is.null(xorder.species)) stop("at least one 'xorder' argument must be specified")
