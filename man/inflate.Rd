@@ -1,38 +1,36 @@
+\encoding{UTF-8}
 \name{inflate}
 \alias{inflate}
-\title{Inflate Data Frame According to Integer Vector}
+\title{Inflate a Data Frame}
 \description{
-This function inflates a data frame according to a column containing integers, by repeating each rows as many times as the integer value. This is an internal function used by the function \code{\link{xcount}} converting an object of 'sscount' into 'xcount'.
+The function inflates a data frame based on count values in a vector corresponding the rows.
 }
 \usage{
-inflate(factors, count)
+inflate(x, by)
 }
 \arguments{
-  \item{factors}{a data frame or matrix used. Rows in \code{factors} are repeated as many times as the value of 
-    respective value of \code{count}. Thus, number of rows in \code{factor} must equal the length of \code{count}.}
-  \item{count}{a numeric (integer) vector with the same length as number of rows in \code{factors}.}
+  \item{x}{a matrix or data frame, but can be a vector.}
+  \item{by}{a vector containing positive (non zero) real numbers.}
+}
+\details{
+Each rows of the data frame \code{x} will be repeated as many times as the corresponding value in the vector \code{by}. This function is called internally by the function \code{\link{stcs}}.
 }
 \value{
-A matrix with columns as in \code{factors}, and rows according to sum of \code{count}.
-}
-\author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
-\seealso{
-  \code{\link{sscount}}, \code{\link{xcount}}
-}
-\examples{
-ss <- data.frame(
-cbind(
-c("sample1","sample1","sample2","sample2","sample3","sample4"),
-c("species1","species1","species1","species2","species3","zero.count"),
-c("male","female","male","female","male","male")
-),
-c(1, 2, 10, 3, 4, 1)
-)
-colnames(ss) <- c("sample.id", "species.id", "gender", "catch")
+A data frame with columns as in the original (\code{x}) and \code{sum(by)} number of rows.}
+\references{
+\enc{Sólymos}{Solymos} P. 2008. mefa: an R package for handling and reporting count data. \emph{Community Ecology} 9, 125--127.
 
-inflate(ss[,1:3], ss[,4])
-inflate(ss[,1:3], c(1:6))
-inflate(ss[,1:3], rep(2, 6))
+\url{http://mefa.r-forge.r-project.org/}
 }
-\keyword{manip}
-\keyword{utilities}
+\author{
+\enc{Péter Sólymos}{Peter Solymos}, \email{solymos@ualberta.ca}
+}
+\seealso{\code{\link{stcs}}}
+\examples{
+x <- data.frame(sample = LETTERS[c(1,1,2,2,3)],
+    species = letters[c(5,5,5,6,7)],
+    count = c(1,2,10,3,4), segment = letters[c(8,9,8,9,8)])
+x
+inflate(x[,c(1,2,4)], x[,3])
+}
+\keyword{ manip }

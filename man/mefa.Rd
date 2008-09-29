@@ -1,182 +1,139 @@
+\encoding{UTF-8}
 \name{mefa}
+\alias{mefa-package}
 \alias{mefa}
+\alias{is.mefa}
 \alias{as.mefa}
 \alias{print.mefa}
-\alias{plot.mefa}
-\alias{report.mefa}
-\alias{report}
-\title{Makes Object of Class 'mefa'}
+\alias{summary.mefa}
+\alias{print.summary.mefa}
+\alias{dim.mefa}
+\alias{dimnames.mefa}
+\title{Create an Object of Class 'mefa'}
 \description{
-Makes and object of class 'mefa' from an 'xcount' and sample and species attribute 'xorder' objects. Incomplete 'mefa' object can becreated, when one out of samples or species attributes are missing.
+An object of class 'mefa' is a compendium of a crosstabulated taxa-by-samples count data, and optionally count data for segments, and linked tables for samples and taxa.
 }
 \usage{
-mefa(xc, xorder.samples, xorder.species, n = 1)
-
-\method{print}{mefa}(x, cutoff = 25, \dots)
-
-\method{plot}{mefa}(x, sample.var = NULL, species.var = NULL, \dots)
-
-\method{as}{mefa}(x, n = NULL, \dots)
-
-report(x, \dots)
-\method{report}{mefa}(x, filename, n = 1, ordering = "species", biotic.data = 1, 
-    species.name = 1, species.order = 1, author = 0, 
-    tex = FALSE, binary = FALSE, sep = c(", ", " (", ")", "; "), \dots)
+mefa(xtab, samp = NULL, taxa = NULL, id.samp = NULL, id.taxa = NULL,
+segment = TRUE, nested = FALSE, drop.zero = FALSE, drop.index = FALSE,
+xtab.fixed = TRUE)
+\method{as}{mefa}(x, \ldots)
+\method{is}{mefa}(x)
+\method{print}{mefa}(x, \ldots)
+\method{summary}{mefa}(object, \ldots)
+\method{print}{summary.mefa}(x, nlist = 10, \ldots)
+\method{dim}{mefa}(x)
+\method{dimnames}{mefa}(x)
 }
 \arguments{
-  \item{xc}{object of class 'xcount' or 'xclist'. If \code{xc} is an object of class 'xclist', than the \code{n} argument is used to choose from the list.}
-  \item{xorder.samples}{object of class 'xorder' for sample attributes, or \code{NULL}.}
-  \item{xorder.species}{object of class 'xorder' for species attributes, or \code{NULL}.}
-  \item{x}{an object of class 'mefa' of 'mflist' (for \code{as.mefa}). If \code{mf} is an object of class 'mflist', than the \code{n} argument is used to choose from the list. For the \code{report} method, the object \code{mf} can not have any \code{NULL} attribute tables.}
-  \item{n}{element of the 'xclist' or 'mflist' object to choose.}
-  \item{cutoff}{number of samples/species with zero toal count to be listed.}
-  \item{sample.var}{column index (numeric or character) of the sample attribute table to plot as independent variable.}
-  \item{species.var}{column index (numeric or character) of the species attribute table to plot as independent variable.}
-  \item{filename}{name of the file to be created in the working directory.}
-  \item{ordering}{type of ordering (sectioning), by \code{"species"} (default) or by \code{"samples"}.}
-  \item{biotic.data}{list of columns in the sample attribute table of the 'mefa' object,
-    data will be sorted according to subsequent columns (there is no limit for length).}
-  \item{species.name}{a column identifier in the species attribute table of the 'mefa' object
-    containing species names.}
-  \item{species.order}{a column identifier in the species attribute table of the 'mefa' object,
-    by which the ordering of species names can be made (eg. according to taxonomy).}
-  \item{author}{a column identifier in the species attribute table of the 'mefa' object,
-    containing author names for species. By default it is \code{0}, that is no author names are listed.}
-  \item{tex}{logical operator, if \code{TRUE} species names will be italicized and sectioning will
-    be used according to \code{ordering} argument. Default is \code{FALSE}.}
-  \item{binary}{logical operator, if \code{TRUE} count data will not be written into the output file.
-    Default is \code{FALSE}, when count data are written.}
-  \item{sep}{a character vector, with four elements, containing separator strings. The first is placed between \code{biotic.data} values, second is placed before, third is after the count value,
-    fourth is the separator between full data entries. After the last entry,
-    a dot is placed instead of the fourth separator.}
-  \item{...}{other arguments.}
+  \item{xtab}{count data. Can be an object of class 'stcs', or a matrix or data frame.}
+  \item{samp}{a data frame containing rows for samples, or \code{NULL}. See argument \code{xtab.fixed} and details for sample matching options.}
+  \item{taxa}{a data frame containing rows for taxa, or \code{NULL}. See argument \code{xtab.fixed} and details for taxa matching options.}
+  \item{id.samp}{\code{NULL} if sample names for matching are the rownames of \code{samp}, otherwise, the index refers to the column of \code{samp} where the names are located.}
+  \item{id.taxa}{\code{NULL} if taxa names for matching are the rownames of \code{taxa}, otherwise, the index refers to the column of \code{taxa} where the names are located.}
+  \item{segment}{logical, whether information in the segments column of the 'stcs' object should be used (\code{TRUE}, default). It has no effect when \code{xtab} is matrix or data frame.}
+  \item{nested}{logical, whether segments should be nested within each other from the first to the last (\code{TRUE}) or not (\code{FALSE}, default).}
+  \item{drop.zero}{logical, if \code{TRUE} empty samples are removed from the result (can be useful before multivariate analyses). Otherwise, empty rows are left intact (\code{FALSE}, default).}
+  \item{drop.index}{logical, whether columns of the samples and taxa tables containing the names used for matching should be removed (\code{TRUE}) to reduce redundancy or not (\code{FALSE}, default). This argument has effect only if \code{id.samp} and \code{id.taxa} are not \code{NULL}.}
+  \item{xtab.fixed}{logical, if \code{TRUE} (default) the \code{samp} and \code{taxa} tables are subsetted and ordered according to the names of \code{xtab}. If \code{FALSE}, \code{xtab} is also subsetted according to the intersect of the names. Row and column ordering is determined by \code{xtab} in either cases.}
+  \item{x, object}{an object of class 'mefa'.}
+  \item{nlist}{number of elements in the list of segment names to print. List of segment names is truncated at 10 by default.}
+  \item{\dots}{other arguments passed to functions.}
 }
 \details{
-The \code{plot} method works as for 'xcount' objects if only a 'mefa' object is specified. If sample and species attributes (one or both) are also specified, scatterplots or box-and-whiskers diagrams are drawn, based on the type of the independent variable. Species richness, number of individuals, abundance and number of species occurrences are plotted as response variable. If the crosstable is binary, only richness and occurrences are used.
+Main goals of the \code{mefa} function are to (1) convert a long formatted object of 'stcs' into a crosstabulated and optionally segmented 'mefa' object and (2) link this crosstabulation with tables of samples and taxa. The segments can be nested within each other. This feature can be useful, if segments represent e.g. subsequent sampling periods (years) and the the aim is to detect effects of data accumulation over time.
 
-When \code{tex = TRUE}, the result of the \code{report} method can be directly used in a LaTeX document by copy-pasting the output or by the include option.
+A mefa object can be viewed as a project oriented compendium of the data. It contains 3 dimensional (samples, taxa, segments) representation of the count data and data tables for samples and taxa. Segments contain information on some particular internal division of the data (sub populations, method specific partitions, repeated measures), but it has technical significance. Thus data tables for segments are not supported.
 
+If the input \code{xtab} is a matrix, dimnames are necessary if either \code{samp} or \code{taxa} tables are provided. In other cases, dimnames are not necessary. In this way, simple statistics can be returned for the matrix.
+
+The print method returns basic information, instead of a long structural representation.
+
+The summary contains statistics calculated from the 'mefa' object (species richness, number of individuals, occupancy, abundance, total sum, matrix fill, etc., see 'Value' section). The list can be recalled by e.g. \code{unclass(summary(x))}, elements of the list e.g. \code{summary(x)$srich}.
+
+Methods for extracting, subsetting, plotting and reporting 'mefa' objects are discussed elsewhere (see links in 'See also' section). On how the 'mefa' objects can be used in further analyses, see 'Examples'.
 }
 \value{
-A result is an object of class 'mefa'.
-  \item{data}{count data from the 'xcount' object.}
-  \item{sample.attr}{data frame containing data of 'xorder' object containing sample attributes.}
-  \item{species.attr}{data frame containing data of 'xorder' object containing species attributes.}
-  \item{call}{returns the call.}
-  \item{segment}{segment of the 'xcount' object.}
-  \item{digits}{digits of the 'xcount' object.}
-  \item{nsamples}{number of rows (samples) in \code{data}.}
-  \item{nspecies}{number of columns (species) in \code{data}.}
-  \item{totalcount}{sum of count or measurement in \code{data}.}
-  \item{presences}{sum of presences in \code{data}.}
-  \item{ninds}{a vector, containing number of individuals (or sum of measurement values) within samples.}
-  \item{srichn}{a vector, containing number of species (based on occurrences) within samples.}
-  \item{specabund}{a vector, containing number of individuals (or sum of measurement values) within species.}
-  \item{specoccur}{a vector, containing number of occurrences within species.}
-  \item{attributes}{character, indicating the presence of \code{"both"} or only one 
-    (\code{"samples.only"} or \code{"species.only"}) attribute tables.}
-  \item{attrib.matrix}{a matrix with 2 rows and 3 columns. Columns contain values of \code{check.setrel},
-    number of variables and \code{na} from 'xorder' objects for samples (first row) and species 
-    (second row). If one 'xorder' object is missing, respective row contains \code{NA}s.}
+The \code{mefa} function returns an object of class 'mefa'. It is a list with 5 elements:
 
-The \code{report} method writes text file named \code{filename} into the working directory.
+  \item{call}{the function call.}
+  \item{xtab}{crosstabulated count data, rows are samples, columns are taxa.}
+  \item{segm}{list of matrices if segments are used, otherwise \code{NULL}.}
+  \item{samp}{a data frame for sample related data (rows correspond to samples) if provided, otherwise \code{NULL}.}
+  \item{taxa}{a data frame for taxa related data (rows correspond to taxa) if provided, otherwise \code{NULL}.}
+
+
+The \code{summary.mefa} function returns a list invisibly, with elements:
+
+  \item{srich}{vector with species richness values for the samples.}
+  \item{ninds}{vector with number of individuals values for the samples.}
+  \item{occup}{number of sites occupied by each species.}
+  \item{abund}{abundances of each species.}
+  \item{ntot}{total number of individuals.}
+  \item{mfill}{matrix fill.}
+  \item{nsamp}{number of samples.}
+  \item{ntaxa}{number of taxa.}
+  \item{nsegm}{number of segments.}
+  \item{segment}{vector of segment names.}
+  \item{call}{the function call from the 'mefa' object.}
+  \item{nested, drop.zero, xtab.fixed}{attributes of the 'mefa' object.}
+
+The method \code{dim} returns a vector of length 3 with values for number of samples, number of taxa and number of segments in the 'mefa' object. The third value is 1 in cases, when \code{s$segm} is \code{NULL} (because it is 1 undefined segment essentially identical.to the matrix \code{x$xtab}, thus no need for a replicate).
+
+The \code{dimnames} method returns a list of three character vectors for names of samples, taxa and segments. These can be \code{NULL} as well.
 }
-\author{Peter Solymos, \email{Solymos.Peter@aotk.szie.hu}, \url{http://www.univet.hu/users/psolymos/personal/}}
+\references{
+\enc{Sólymos}{Solymos} P. 2008. mefa: an R package for handling and reporting count data. \emph{Community Ecology} 9, 125--127.
+
+\url{http://mefa.r-forge.r-project.org/}
+}
+\author{
+\enc{Péter Sólymos}{Peter Solymos}, \email{solymos@ualberta.ca}
+}
+\note{
+The \code{mefa} function alone can be used instead of the combination of object classes \code{xcount} and \code{xorder} used in older (< 2.0) versions of the \strong{mefa} package. Further it is also extended by previously undocumented features.
+}
 \seealso{
-  \code{\link{check.attrib}}, \code{\link{marmat}}, \code{\link{sscount}}, \code{\link{xcount}}, \code{\link{xorder}}
+Further methods are discussed on seperate help pages: see \code{\link{[.mefa}} and \code{\link{aggregate.mefa}} for extracting and aggregating the data, \code{\link{melt.mefa}} for redefining segments or melting data into long format, \code{\link{report.mefa}} for generating report into file, and \code{\link{plot.mefa}} \code{\link{boxplot.mefa}} and \code{\link{image.mefa}} for graphical display.
+
+The simple 2 dimensional wide arrangement of long formatted data can be done by the function \code{\link[reshape]{reshape}} in the \strong{reshape} package of Hadley Wickham, and by the \code{\link[simba]{mama}} function in the \strong{simba} package by  Gerald Jurasinski. These are, however, not useful either for 3 dimensional (segmented) crosstabulation (see \code{\link{table}} function), or linking data tables for sample and taxa with the count data.
 }
 \examples{
-### Example 1: simple atrificial data
-
-ss <- data.frame(
-cbind(
-c("sample1","sample1","sample2","sample2","sample3","sample4"),
-c("species1","species1","species1","species2","species3","zero.count"),
-c("male","female","male","female","male","male")
-),
-c(1, 2, 10, 3, 4, 1)
-)
-colnames(ss) <- c("sample.id", "species.id", "gender", "catch")
-
-spectab <- as.data.frame(rbind(
-	c("species3", "family1", "1"),
-	c("species2", "family2", "5"),
-	c("species1", "family1", "2"),
-	c("species5", "family2", "1"),
-	c("species4", "family1", "10")
-))
-colnames(spectab) <- c("species", "taxonomy", "size")
-
-sampletab <- as.data.frame(rbind(
-	c("sample3", "bad"),
-	c("sample1", "good"),
-	c("sample2", "good"),
-	c("sample4", "bad")))
-colnames(sampletab) <- c("sample", "quality")
-
-xct <- xcount(sscount(ss, zc="zero.count"))
-xo1 <- xorder(xct, "samples", sampletab, 1)
-xo2 <- xorder(xct, "species", spectab, 1)
-
-mf1 <- mefa (xct, xo1, xo2)
-mf1
-
-mf2 <- mefa(xcount(sscount(ss, zc="zero.count"), 2), xo1, xo2)
-mf2
-
-### Example 2: field data of Villany Hills
-
-\dontrun{
-data(landsnail, vsample, vtable)
-
-vt <- as.xcount(vtable, FALSE)
-spec <- xorder(vt, which="species", landsnail, 2)
-sampl <- xorder(vt, which="samples", vsample, 1)
-
-vmf <- mefa(vt, sampl, spec)
-vmf
-
-plot(vmf)
-plot(vmf,type="rank")
-plot(vmf, 3)
-plot(vmf, NULL, 5)
-plot(vmf, "site.descr", "shell.dimension")
-
-### Example 3: field data of the dolina
-
-data(dol.count, dol.sample, landsnail)
-
-dmf <- mefa(
-dxc <- xcount(sscount(fill.count(dol.count), zc="zero.count")),
-xorder(dxc, which="samples", dol.sample, 1),
-xorder(dxc, which="species", landsnail, 2)
-)
-
-dmf
-
-plot(dmf, "microhabitat", "shell.dimension")
-
-### Reporting
-v2 <- strify(vmf, strata = "site.descr", which = "samples")
-habi <- xorder(as.xcount(v2), which="samples", vhabitat, 2)
-vmf2 <- mefa(as.xcount(v2), habi, spec)
-
-report.mefa("vspec-report.txt", vmf2, "species", c(3,2,4:7), "spec.name", "order", 0,
-    FALSE, FALSE, sep = c(", "," (",")","; "))
-
-report.mefa("vsampl-report.txt", vmf2,"samples", c(3,2,4:7), "spec.name", "order", 0,
-    FALSE, FALSE, sep = c(", "," (",")",",\n"))
-
-report.mefa("vspec-report.tex", vmf2,"species", c(3,2,4:7), "spec.name", "order", "author",
-    TRUE, FALSE, sep = c(", "," (",")","; "))
-
-report.mefa("vsampl-report.tex", vmf2,"samples", c(3,2,4:7), "spec.name", "order", "author",
-    TRUE, TRUE, sep = c(", "," (",")",",\n"))
-
-### Sweave example
-
-mefadocs("SampleReport")
+data(DOLINAcounts, DOLINAsamples, DOLINAtaxa)
+## Input is stcs
+x1 <- mefa(stcs(DOLINAcounts))
+x1
+## Input is matrix
+x2 <- mefa(x1$xtab)
+x2
+## Attach data frame for samples
+x3 <- mefa(stcs(DOLINAcounts), DOLINAsamples)
+x3
+## Attach data frame for samples and taxa
+x4 <- mefa(stcs(DOLINAcounts), DOLINAsamples, DOLINAtaxa)
+x4
+## Methods
+## (chapter 'See also' provides
+## links for further methods)
+summary(x4)
+## Descriptives inside the summary
+unclass(summary(x4))
+## Testing mefa objects
+is(x4, "mefa")
+## Dimensions
+dim(x4)
+## Dimnames
+dimnames(x4)
+## Simple examples how to use mefa objects in analyis
+## GLM on sample abundances
+mod <- glm(summary(x4)$nind ~ .^2,
+    data = x4$samp[, c(4, 6)], family = quasipoisson)
+summary(mod)
+## Cluster analysis of community matrix
+x5 <- aggregate(x4, c("method", "microhab"))
+h <- hclust(dist(x5$xtab))
+plot(h)
 }
-}
-\keyword{manip}
-\keyword{classes}
+\keyword{ classes }
+\keyword{ manip }
+\keyword{ methods }
