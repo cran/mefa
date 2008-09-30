@@ -1,23 +1,18 @@
 `inflate` <-
-function(factors, count){
-
-if(nrow(factors) != length(count)) stop("Number of dimensions must be equal!")
-if(any(count < 0)) stop("Negative count value.")
-if(any(count == 0)) stop("Zero count value")
-
-infl.data <- array(data=NA, dim=c(ncol(factors), sum(count)))
-
-factors <- as.matrix(factors)
-j <- 1 # this goes to length(infl.data)
-
-for (i in 1:length(count)){
-		k <- j + count[i] - 1
-		infl.data[ ,j:k] <- factors[i, ]
-		j <- k + 1
+function (x, by)
+{
+    x <- data.frame(x)
+    if (nrow(x) != length(by))
+        stop("dimensions do not match")
+    if (!identical(all.equal(by, round(by)), TRUE))
+        stop("'by' must be integer")
+    if (any(by <= 0))
+        stop("'by' must be positive")
+    out <- apply(x, 2, function(x) {
+        z <- mapply(rep, x, by)
+        names(z) <- NULL
+        unlist(z)
+        })
+    return(data.frame(out))
 }
 
-out <- t(as.data.frame(infl.data))
-colnames(out) <- colnames(factors)
-rownames(out) <- c(1:nrow(out))
-return(out)
-}
