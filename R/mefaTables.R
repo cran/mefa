@@ -18,12 +18,12 @@ function(xtab, dframe, margin, index=NULL, drop.index=FALSE, xtab.fixed=TRUE)
         nam.orig <- colnames(xtab)
         xtab <- xtab[, order(colnames(xtab))]
         xnam <- colnames(xtab)}
-# if index is specified that use as rownames
+# if index is specified that used as rownames
     if (!is.null(index)) 
         rownames(dframe) <- dframe[, index]
     dnam <- rownames(dframe)
 # xtab fixed
-    if (xtab.fixed && identical(xnam, dnam)) {
+    if (xtab.fixed) {
         dsub <- dframe[dnam %in% xnam, ]
         dsub <- dsub[order(rownames(dsub)), ]
         xsub <- xtab

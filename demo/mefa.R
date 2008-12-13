@@ -1,8 +1,13 @@
-wait <- function(vign=FALSE) {
-  if (vign) {
-    ANSWER <- readline("Do you want to open the vignette now? (y/n) ")
-    if (substr(tolower(ANSWER), 1, 1) == "y")
-      vignette("mefa", package = "mefa")
+wait <- function(vign=0) {
+  if (vign!=0) {
+    if (vign==1) {
+        ANSWER <- readline("Do you want to open the vignette? (y/n) ")
+        if (substr(tolower(ANSWER), 1, 1) == "y")
+        vignette("mefa", package = "mefa")}
+    if (vign==2) {
+        ANSWER <- readline("Do you want to check out mefa website? (y/n) ")
+        if (substr(tolower(ANSWER), 1, 1) == "y")
+        mefaweb()}
   } else {
     ANSWER <- readline("Please press ENTER to continue ... ")
   }
@@ -10,7 +15,7 @@ wait <- function(vign=FALSE) {
 
 cat("## Demo for the 'mefa' package")
 
-wait(TRUE)
+wait(1)
 
 cat("## Load the package and the example data set")
 
@@ -198,19 +203,19 @@ summary(mod.fr)
 
 wait()
 
-# require vegan package
-#library(vegan)
-#m6 <- m2[summary(m2)$s.abu != 0, , ]
-#m6.ado <- adonis(m6$xtab ~ .^2,
-#    data = m6$samp, permutations = 100)
-#m6.ado
+if (require(vegan)) {
+m6 <- m2[summary(m2)$s.abu != 0, , ]
+m6.ado <- adonis(m6$xtab ~ .^2,
+    data = m6$samp, permutations = 100)
+m6.ado
+}
 
 wait()
 
-# require ade4 package
-#library(ade4)
-#m2.cca <- ade4::cca(data.frame(m2$segm[["fresh"]]), m2$samp, scan = FALSE)
-#plot.pcaiv(m2.cca)
+if (require(ade4)) {
+m2.cca <- ade4::cca(data.frame(m2$segm[["fresh"]]), m2$samp, scan = FALSE)
+plot.pcaiv(m2.cca)
+}
 
 wait()
 
@@ -232,5 +237,7 @@ for (i in 1:4) {
 }
 par(opar)
 
-cat("## End of mefa demo")
+cat("## End of mefa demo\n")
+
+wait(2)
 
