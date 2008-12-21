@@ -1,10 +1,52 @@
 MEFA VERSIONS
 
-Version 2.1-0 -- November 12, 2008 (opened - r???)
+Version 2.1-2 -- December 11, 2008 (opened - r268)
+
+    * suggests and vignette dependencies: ade4 and
+      vegan added, due to error reported by Kurt
+      Hornik after CRAN submission.
+    * label: assigns and returns a label stored as
+      a deparsed attribute. Can be used to store
+      relevant information on the current data
+      set. Note: inheritance is not implemented,
+      so by any transformation of the object
+      into another one, it is lost.
+    * vignette and demo updated: based on changes
+      made in the JSS paper due to second revision.
+    * as.data.frame: new method to take advantage
+      in modeling. It returns a data frame containing
+      variables that are to be used in a model
+      i.e. glm. Four helper functions are made to
+      support this function, but those can be used
+      on their own as well (mss, msr, mts, mtr).
+    * plot methods: many tiny changes, image method
+      now display names, but by default the axes are
+      hided and just a box is drawn.
+
+
+Version 2.1-1 -- December 11, 2008 (closed - r268)
+
+    * melt.mefa: did not return stcs class if segments
+      were present -- bug fixed.
+    * mefaTable: xtab.fixed=TRUE behaved like FALSE
+      when names had exact match, fixed.
+    * demo: got a new ending, by a question for opening
+      mefa website.
+
+
+Version 2.1-0 -- November 17, 2008 (closed - r268)
+
+    * minor release: on CRAN containing additions of
+      from 2.0-2 and some polishing.
+    * basic object structures and methods: will not change
+      in future versions. mefa 2.1 is a yardstick in
+      package development. Sorry for any inconveniences
+      happened because of restructuring the package.
+
 
 Version 2.0-2 -- November 12, 2008 (closed - r252)
 
-    * intro text: mefa gives date info when loaded.
+    * onload text: mefa gives date info when loaded.
     * mefaCompare: compares 2 objects of class mefa,
       based on dimnames and numeric values. Sample
       and taxa tables are not compared.
@@ -19,7 +61,7 @@ Version 2.0-2 -- November 12, 2008 (closed - r252)
     * extract.mefa: nested segment indexing convention
       introduced when extracted.
     * mefaNestedless: makes an object with non-nested
-      segments, bo be used in melt.
+      segments, to be used in melt.
     * as.mefa: if class is mefa, the object can be
       rebuilt with new arguments (e.g. drop.zero,
       nested, segment).
