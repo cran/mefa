@@ -2,7 +2,6 @@
 \name{stcs}
 \alias{stcs}
 \alias{is.stcs}
-\alias{as.stcs}
 \alias{summary.stcs}
 \title{Create an Object of Class 'stcs'}
 \description{
@@ -11,7 +10,6 @@ This function creates object of class 'stcs' from a data frame. This is the prim
 \usage{
 stcs(dframe, expand = FALSE, drop.zero = FALSE, zero.pseudo = "zero.pseudo")
 \method{is}{stcs}(x)
-\method{as}{stcs}(x, \dots)
 \method{summary}{stcs}(object, \ldots)
 }
 \arguments{
@@ -32,10 +30,12 @@ Methods for extracting, subsetting are the same as for data frame objects. Plott
 \value{
 Returns an object of class 'stcs' with 4 columns. The column names are converted consistently into \code{samp} for samples, \code{taxa} for taxa names, \code{count} for counts and \code{segm} for segment names.
 
-The class has its own methods (i.e. \code{is}, \code{as}, \code{summary} and \code{plot}), but also has a \code{data.frame} class attribute. Thus other methods that available for data frames are applicable to an object of class 'stcs' (e.g. \code{print}, \code{str}).
+The class has its own methods (i.e. \code{is}, \code{as.stcs}, \code{summary} and \code{plot}), but also has a \code{data.frame} class attribute. Thus other methods that available for data frames are applicable to an object of class 'stcs' (e.g. \code{print}, \code{str}).
 }
 \references{
 \enc{Sólymos}{Solymos} P. 2008. mefa: an R package for handling and reporting count data. \emph{Community Ecology} 9, 125--127.
+
+\enc{Sólymos}{Solymos} P. 2009. Processing ecological data in R with the mefa package. \emph{Journal of Statistical Software} 29(8), 1--28. \url{http://www.jstatsoft.org/v29/i08/}
 
 \url{http://mefa.r-forge.r-project.org/}
 }
@@ -49,6 +49,8 @@ The \code{stcs} function nearly equivalent to the \code{sscount} function in old
 \code{\link{data.frame}}, \code{\link{summary.data.frame}}, \code{\link{str}}, \code{\link{table}}
 
 See \code{\link{plot.stcs}} \code{\link{boxplot.stcs}} and \code{\link{image.stcs}} for graphical display options.
+
+See \code{\link{as.stcs}} for coercion methods.
 
 Similar standardized count data formats can be found in the \strong{untb} package by Robin K. S. Hankin: \code{\link[untb]{count}}, \code{\link[untb]{census}}.
 }

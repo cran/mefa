@@ -3,7 +3,6 @@
 \alias{mefa-package}
 \alias{mefa}
 \alias{is.mefa}
-\alias{as.mefa}
 \alias{print.mefa}
 \alias{summary.mefa}
 \alias{print.summary.mefa}
@@ -17,7 +16,6 @@ An object of class 'mefa' is a compendium of a crosstabulated taxa-by-samples (c
 mefa(xtab, samp = NULL, taxa = NULL, id.samp = NULL, id.taxa = NULL,
 segment = TRUE, nested = FALSE, drop.zero = FALSE, drop.index = FALSE,
 xtab.fixed = TRUE)
-\method{as}{mefa}(x, samp, taxa, \ldots)
 \method{is}{mefa}(x)
 \method{print}{mefa}(x, nlist = 10, \ldots)
 \method{summary}{mefa}(object, nlist = 10, \ldots)
@@ -88,6 +86,8 @@ The \code{dimnames} method returns a list of three character vectors for names o
 \references{
 \enc{Sólymos}{Solymos} P. 2008. mefa: an R package for handling and reporting count data. \emph{Community Ecology} 9, 125--127.
 
+\enc{Sólymos}{Solymos} P. 2009. Processing ecological data in R with the mefa package. \emph{Journal of Statistical Software} 29(8), 1--28. \url{http://www.jstatsoft.org/v29/i08/}
+
 \url{http://mefa.r-forge.r-project.org/}
 }
 \author{
@@ -98,6 +98,8 @@ The \code{mefa} function alone can be used instead of the combination of object 
 }
 \seealso{
 Further methods are discussed on seperate help pages: see \code{\link{[.mefa}} and \code{\link{aggregate.mefa}} for extracting and aggregating the data, \code{\link{melt.mefa}} for redefining segments or melting data into long format, \code{\link{report.mefa}} for generating report into file, and \code{\link{plot.mefa}} \code{\link{boxplot.mefa}} and \code{\link{image.mefa}} for graphical display.
+
+See \code{\link{as.mefa}} for coercion methods.
 
 The simple 2 dimensional wide arrangement of long formatted data can be done by the function \code{\link[reshape]{reshape}} in the \strong{reshape} package of Hadley Wickham, by the \code{\link[simba]{mama}} function in the \strong{simba} package by  Gerald Jurasinski, and by the function \code{\link[labdsv]{matrify}} in the \strong{labdsv} package of David W. Roberts. These are, however, not useful either for 3 dimensional (segmented) crosstabulation (see \code{\link{table}} and \code{\link{xtabs}} functions), or linking data tables for sample and taxa with the count data.
 }
