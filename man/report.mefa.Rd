@@ -14,7 +14,7 @@ report(x, \ldots)
     taxa.order = NULL, grouping = FALSE, tex = FALSE, binary = FALSE,
     tex.control = list(ital.taxa = TRUE, noindent = TRUE, 
     bold.sect = TRUE, bold.1st = TRUE, vspace1 = 0.5, vspace2 = 0.2),
-    sep = c(",", ":", "(", ":", ",", ")", ";"), outdir = NULL, \ldots)
+    sep = c(",", ":", "(", ":", ",", ")", ";"), dir = getwd(), \ldots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -34,7 +34,7 @@ report(x, \ldots)
   \item{binary}{logical, if \code{TRUE} the result will contains count data.}
   \item{tex.control}{a list with LaTex formatting options (if \code{tex = TRUE}). The \code{ital.taxa} controls italicised taxa names, \code{noindent} controls indentation of paragraphs, \code{bold.sect} controls boldface type of paragraph openings, \code{bold.1st} controls the boldface type of first elements of each record of a given species, \code{vspace1} controls the space between species blocks, \code{vspace2} controls the space between paragraphs of the same species (if \code{gouping = FALSE}).}
   \item{sep}{character vector of length 7. The 1st separates values in \code{samp.var}, 2nd is placed between values of \code{samp.var} if redundant elements were dropped, 3rd is the opening character before count data, 4th stands after the segment name, 5th separates values of segments, 6th is the closing character after the count data, 7th separates the records.}
-  \item{outdir}{character, full path of the directory where the file should be written (working directory is then restored). If \code{NULL}, the current working directoty is used.}
+  \item{dir}{character, full path of the directory where the file should be written (working directory is then restored). If \code{NULL}, the current working directoty is used.}
   \item{\ldots}{further arguments potentially passed (currently there are none).}
 }
 \details{
@@ -44,17 +44,17 @@ report(x, \ldots)
 Writes a file into the working (or a specified) directory.
 }
 \references{
-\enc{Sólymos}{Solymos} P. 2008. mefa: an R package for handling and reporting count data. \emph{Community Ecology} 9, 125--127.
+\enc{S\'olymos}{Solymos} P. (2008) mefa: an R package for handling and reporting count data. \emph{Community Ecology} \bold{9}, 125--127.
 
-\enc{Sólymos}{Solymos} P. 2009. Processing ecological data in R with the mefa package. \emph{Journal of Statistical Software} 29(8), 1--28. \url{http://www.jstatsoft.org/v29/i08/}
+\enc{S\'olymos}{Solymos} P. (2009) Processing ecological data in R with the mefa package. \emph{Journal of Statistical Software} \bold{29(8)}, 1--28. \url{http://www.jstatsoft.org/v29/i08/}
 
 \url{http://mefa.r-forge.r-project.org/}
 }
 \author{
-\enc{Péter Sólymos}{Peter Solymos}, \email{solymos@ualberta.ca}
+\enc{P\'eter S\'olymos}{Peter Solymos}, \email{solymos@ualberta.ca}
 }
 \note{
-The \code{by.taxa = FALSE} option is not implemented.
+The \code{by.taxa = FALSE} option is not yet implemented.
 }
 \seealso{\code{\link{mefa}}, \code{\link{write}}}
 \examples{
