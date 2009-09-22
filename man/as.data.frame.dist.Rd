@@ -1,8 +1,7 @@
 \encoding{UTF-8}
-\name{dist2vec}
+\name{as.data.frame.dist}
 \Rdversion{1.1}
 \alias{vec2dist}
-\alias{dist2vec}
 \alias{is.dist}
 \alias{as.data.frame.dist}
 \title{
@@ -12,10 +11,11 @@ Manipulation Tools for Class 'dist'
 Converts a 'dist' object into vector and vice versa.
 }
 \usage{
-vec2dist(x, size, labels = NULL, diag = FALSE, upper = FALSE, call = FALSE, method = NULL)
-dist2vec(x)
+vec2dist(x, size, labels = NULL, diag = FALSE, upper = FALSE, 
+call = FALSE, method = NULL)
 is.dist(x)
-\method{as.data.frame}{dist}(x, row.names = NULL, optional = FALSE, ...)
+\method{as.data.frame}{dist}(x, row.names = NULL, 
+optional = FALSE, dim.names = FALSE, ...)
 }
 \arguments{
   \item{x}{
@@ -33,14 +33,16 @@ Row names for the resulting data frame.
   \item{optional}{
 Argument not yet used.
 }
+  \item{dim.names}{
+Logical, if \code{TRUE}, names stored in the \code{Labels} attribute of the 
+\code{dist} object are returned as factors instead of row/column indices.
+}
   \item{\dots}{
 Other arguments passed to functions.
 }
 }
 \value{
 \code{vec2dist} returns an object of class \code{dist}.
-
-\code{dist2vec} returns a vector.
 
 \code{is.dist} returns a logical statement about the class of the object.
 
@@ -62,10 +64,12 @@ vec2dist(1:3, 3)
 vec2dist(1:3, 3, diag = TRUE)
 vec2dist(1:3, 3, diag = TRUE, upper = TRUE)
 vec2dist(1:3, 3, labels=letters[1:3])
-(x <- dist(1:5))
+x <- dist(1:5)
+attr(x, "Labels") <- LETTERS[1:5]
+x
 is.dist(x)
-dist2vec(x)
 as.data.frame(x)
+as.data.frame(x, dim.names = TRUE)
 }
 \keyword{ manip }
 

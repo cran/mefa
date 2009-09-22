@@ -1,7 +1,12 @@
 `fill.na` <-
 function (x)
 {
-# not vectorized
+    if (NCOL(x) == 1) {
+        x <- as.matrix(x)
+        onedim <- TRUE
+    } else onedim <- FALSE
+    if (any(is.na(x[1,])))
+        stop("cannot replace 'NA's in first place")
     out <- x
     for (cols in 1:ncol(x)) {
         for (rows in 1:nrow(x)) {
@@ -11,6 +16,8 @@ function (x)
             }
         }
     }
+    if (onedim)
+        out <- array(out)
     return(out)
 }
 
