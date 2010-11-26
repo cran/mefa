@@ -1,5 +1,20 @@
 MEFA VERSIONS
 
+Version 3.1-6 -- August 23, 2010
+    * image plot for 'dist' objects
+    * aoplot method added for abundance-occupancy
+      plots as in Digby and Kempton 1987 p. 40.
+    * New extractor methods added for mefa objects:
+      xtab, samp, taxa, segm
+
+
+Version 3.1-5 -- June 4, 2010
+
+    * as.data.frame.dist renamed to stack.dist
+    * as.mefa.default now return call correctly
+    * plot returns histogram if data is continuous
+      and barplot if data is discrete
+
 Version 3.1-4 -- November 10, 2009 (closed - r486)
 
     * .onUnload problem fixed (reported by B D Ripley)
