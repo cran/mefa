@@ -1,8 +1,8 @@
 Package: mefa
 Type: Package
 Title: Multivariate Data Handling in Ecology and Biogeography
-Version: 3.1-6
-Date: 2010-08-23
+Version: 3.2-0
+Date: 2011-02-07
 Author: Peter Solymos
 Maintainer: Peter Solymos <solymos@ualberta.ca>
 Description: A framework package aimed to provide standardized
@@ -16,13 +16,11 @@ Description: A framework package aimed to provide standardized
         extraction, aggregation, conversion, plotting, summary and
         reporting of `mefa' objects. Reports can be generated in plain
         text or LaTeX format. Vignette contains worked examples.
-Suggests: MASS, ade4, vegan
+Suggests: MASS, ade4, vegan, mefa4, Matrix
 License: GPL-2
 URL: http://mefa.r-forge.r-project.org/
 LazyLoad: yes
 LazyData: true
+Packaged: 2011-02-08 23:53:24 UTC; localadmin
 Repository: CRAN
-Repository/R-Forge/Project: mefa
-Repository/R-Forge/Revision: 500
-Date/Publication: 2010-11-26 07:23:53
-Packaged: 2010-09-01 20:49:33 UTC; rforge
+Date/Publication: 2011-02-09 10:11:41

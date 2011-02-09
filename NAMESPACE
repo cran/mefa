@@ -36,7 +36,11 @@ export(as.mefa,
     samp,
     taxa,
     segm,
-    aoplot)
+    aoplot,
+    as.Xtab,
+    as.Mefa)
+
+#importMethodsFrom(mefa4, xtab, samp, taxa)
 
 S3method("[", mefa)
 S3method(aggregate, mefa)
@@ -65,9 +69,20 @@ S3method(report, mefa)
 S3method(summary, mefa)
 S3method(summary, stcs)
 S3method(stack, dist)
-S3method(xtab, mefa)
-S3method(samp, mefa)
-S3method(taxa, mefa)
-S3method(segm, mefa)
+S3method(xtab, default)
+S3method(samp, default)
+S3method(taxa, default)
+S3method(segm, default)
 S3method(aoplot, default)
 S3method(image, dist)
+
+S3method(as.mefa, sparseMatrix)
+S3method(as.stcs, sparseMatrix)
+S3method(melt, sparseMatrix)
+S3method(as.mefa, Mefa)
+S3method(as.stcs, Mefa)
+S3method(melt, Mefa)
+S3method(as.Xtab, mefa)
+S3method(as.Xtab, stcs)
+S3method(as.Mefa, mefa)
+S3method(as.Mefa, stcs)
