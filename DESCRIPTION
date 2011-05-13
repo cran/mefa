@@ -1,8 +1,8 @@
 Package: mefa
 Type: Package
 Title: Multivariate Data Handling in Ecology and Biogeography
-Version: 3.2-0
-Date: 2011-02-07
+Version: 3.2-1
+Date: 2011-05-13
 Author: Peter Solymos
 Maintainer: Peter Solymos <solymos@ualberta.ca>
 Description: A framework package aimed to provide standardized
@@ -21,6 +21,6 @@ License: GPL-2
 URL: http://mefa.r-forge.r-project.org/
 LazyLoad: yes
 LazyData: true
-Packaged: 2011-02-08 23:53:24 UTC; localadmin
+Packaged: 2011-05-14 14:36:42 UTC; localadmin
 Repository: CRAN
-Date/Publication: 2011-02-09 10:11:41
+Date/Publication: 2011-05-15 07:29:39
