@@ -1,4 +1,4 @@
-555a5f21a4dc3a3917737b0450f7cee4 *DESCRIPTION
+d00f16188c11baae9c87089c3a7883c8 *DESCRIPTION
 51b4c6f965d1891438cb7a2404acc3e4 *NAMESPACE
 f1f38b336048d550835e725acf2992c9 *R/aggregate.mefa.R
 781d4ad5e994826b837377052d2158a5 *R/aoplot.R
@@ -68,19 +68,18 @@ a5ba71cd28f9d168b0555891a56e7275 *R/summary.mefa.R
 941923b9acab5287084b47e98226c21f *R/vec2dist.R
 21e86b6ee672e3041b114ddacb79a77a *R/xtab.R
 dbc64852d14c49fefc53ae811a43be43 *R/xtab.default.R
-4a76faebc2546cc5fbb55909451c3938 *R/zzz.R
+c62157624afc2a8e8479c9c110b78ff3 *R/zzz.R
 2f6454dbd39020f9a6a166d68d36bafe *data/dol.count.rda
 1b6470b4ccbd71a23591143b7a4af90d *data/dol.samp.rda
 277e8a085ec7a15205a33dc597b10b17 *data/dol.taxa.rda
 c9d254ecfe665065eeca6b85d056c787 *demo/00Index
 629c36270b5940d793bd4772ed3e911e *demo/mefa.R
 01abf2753bcaa190c6cfc2a9b7d6ef35 *inst/CITATION
-f65bbf3f3a784599521675cf6134dbac *inst/COPYING
-da47c7536d8d309d5bd8ebad75ac1034 *inst/ChangeLog
+68d3cb6d023b2d0d6008dd624c3575f5 *inst/ChangeLog
 d0c686931b40e3034370a2a99e148ebc *inst/SampleReport
+f185dfa2dbb65ea92ff6e30f34624be6 *inst/doc/mefa.R
 8452dc4b56eca033108b55dd3694ee4f *inst/doc/mefa.Rnw
-c034ac470e2961a134ffb119e4ccbd16 *inst/doc/mefa.bib
-9cefac8bf3d17c6586b16d768cd551b1 *inst/doc/mefa.pdf
+7f4354af84857cc7ddaa0e853b9dac64 *inst/doc/mefa.pdf
 15b4ae77db24b838201e1cdf3cfbfd45 *man/aggregate.mefa.Rd
 be74d8f3754948471a932d8601d15946 *man/aoplot.Rd
 b9e4aa65facfd0cd84e520ffa6a29751 *man/as.mefa.Rd
@@ -105,3 +104,5 @@ e5797d465c01b2ba16da1764bdcf72f7 *man/mefaCrosstab.Rd
 abb9432478426020868345bb1c25667b *man/stack.dist.Rd
 6234a1f5f7519bb90eebef94da67acc7 *man/stcs.Rd
 4cc41cb8b0bb1706d764b73631cc683c *tests/tests.R
+8452dc4b56eca033108b55dd3694ee4f *vignettes/mefa.Rnw
+c034ac470e2961a134ffb119e4ccbd16 *vignettes/mefa.bib
