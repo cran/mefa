@@ -326,21 +326,15 @@ m6.ado
 
 
 ###################################################
-### code chunk number 42: mefa.Rnw:579-580
+### code chunk number 42: cca
 ###################################################
-library("ade4")
+m2.cca <- cca(m2$segm[["fresh"]] ~ ., data=m2$samp, 
+    subset=rowSums(m2$segm[["fresh"]]) > 0)
+plot(m2.cca)
 
 
 ###################################################
-### code chunk number 43: cca
-###################################################
-library("ade4")
-m2.cca <- ade4::cca(data.frame(m2$segm[["fresh"]]), m2$samp, scan = FALSE)
-plot.pcaiv(m2.cca)
-
-
-###################################################
-### code chunk number 44: mefa.Rnw:603-609
+### code chunk number 43: mefa.Rnw:599-605
 ###################################################
 m.list <- list()
 n1 <- rep(c("time", "quadrat"), each = 2)
@@ -351,7 +345,7 @@ for (i in 1:4) m.list[[n3[i]]] <-
 
 
 ###################################################
-### code chunk number 45: clust-raw (eval = FALSE)
+### code chunk number 44: clust-raw (eval = FALSE)
 ###################################################
 ## for (i in 1:4) {
 ##   tmp <- hclust(dist(m.list[[i]]$xtab), "ward")
@@ -360,7 +354,7 @@ for (i in 1:4) m.list[[n3[i]]] <-
 
 
 ###################################################
-### code chunk number 46: clust
+### code chunk number 45: clust
 ###################################################
 opar <- par(mfrow = c(2, 2))
 for (i in 1:4) {
