@@ -1,5 +1,12 @@
 MEFA VERSIONS
 
+Version 3.2-4 -- Sept 25, 2013
+    * Spell check completed using utils:::aspell.
+    * Removed ::: from mefa:::rep.data.frame call, 
+      mefa4:::Mefa and mefa4:::Xtab to satisfy R 3.0.2 checks.
+    * Depends: R (>= 2.14.0) because vignette directory has moved.
+
+
 Version 3.2-3 -- July 11, 2012
     * Startup message: line break removed.
     * inst/COPYING removed.
