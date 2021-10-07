@@ -32,19 +32,12 @@ An object of class 'stsc' if \code{raw = FALSE}, pure 'data.frame' otherwise (be
 \references{
 \enc{S\'olymos}{Solymos} P. (2008) mefa: an R package for handling and reporting count data. \emph{Community Ecology} \bold{9}, 125--127.
 
-\enc{S\'olymos}{Solymos} P. (2009) Processing ecological data in R with the mefa package. \emph{Journal of Statistical Software} \bold{29(8)}, 1--28. \url{http://www.jstatsoft.org/v29/i08/}
+\enc{S\'olymos}{Solymos} P. (2009) Processing ecological data in R with the mefa package. \emph{Journal of Statistical Software} \bold{29(8)}, 1--28. \doi{10.18637/jss.v029.i08}
 
 \url{http://mefa.r-forge.r-project.org/}
 }
 \author{
 \enc{P\'eter S\'olymos}{Peter Solymos}, \email{solymos@ualberta.ca}
-}
-\seealso{
-The generic function \code{melt} can also be found in the \strong{reshape} package of Hadley Wickham, along with methods for data frames, arrays and lists (\code{\link[reshape]{melt.default}}, \code{\link[reshape]{melt.data.frame}}, \code{\link[reshape]{melt.array}}).
-
-Similar function in the \strong{Hmisc} package by Frank Harrel is the \code{\link[Hmisc]{reShape}}.
-
-Similar function in the \strong{simba} package by  Gerald Jurasinski is the \code{\link[simba]{liste}}.
 }
 \examples{
 data(dol.count, dol.samp, dol.taxa)
