@@ -1,5 +1,10 @@
 MEFA VERSIONS
 
+Version 3.2-9 -- May 19, 2024
+
+    * Replace deprecated vegan::adonis with vegan::adonis2.
+    * Maintainer email changed to personal email.
+
 Version 3.2-8 -- Oct 6, 2021
 
     * Added DOI for JSS article to replace URL.

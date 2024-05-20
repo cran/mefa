@@ -1,4 +1,4 @@
-22f7dad646de46a1cae42b4803f7b106 *DESCRIPTION
+b1da5279abacef6a87101c9707da742b *DESCRIPTION
 b60d193f1a8300d4923f29ed4af163d6 *NAMESPACE
 f1f38b336048d550835e725acf2992c9 *R/aggregate.mefa.R
 781d4ad5e994826b837377052d2158a5 *R/aoplot.R
@@ -69,16 +69,16 @@ a5ba71cd28f9d168b0555891a56e7275 *R/summary.mefa.R
 7398399c4999c3097e1892bac28b68ec *R/xtab.R
 2f8df5e2dd0b0c0c54943cd6eee22403 *R/xtab.default.R
 c62157624afc2a8e8479c9c110b78ff3 *R/zzz.R
-1179250b4fd29fc01cfcf94aac343f8f *build/partial.rdb
+f61db891eb928123aba4412ca322f508 *build/partial.rdb
 2f6454dbd39020f9a6a166d68d36bafe *data/dol.count.rda
 1b6470b4ccbd71a23591143b7a4af90d *data/dol.samp.rda
 277e8a085ec7a15205a33dc597b10b17 *data/dol.taxa.rda
 f9cff71bf1542fd770a4f4761232f974 *demo/00Index
-c753b54bccc30ece50dc307dd25b8ea3 *demo/mefa.R
-90ee62a7af5ff7f16d4f37dcc7c21cae *inst/CITATION
-5b8e5f740dc8e3494c5b659fd9e9e532 *inst/ChangeLog
+25176f7417de3c2e7a7269fea3f8838c *demo/mefa.R
+6eef51acfa40d341dcee40e5769b6556 *inst/CITATION
+c31718c4da8af772d0d477f102f86ccb *inst/ChangeLog
 e8bf6b5c6587a8c7b3ce8e7781c8fa86 *inst/SampleReport
-9276f01625602ee27be5ad617de38bcf *inst/tmp/mefa.Rnw
+e127b4408d3f0904ea95dd6756d9f14a *inst/tmp/mefa.Rnw
 f27cf8eec1ebaa51b99e23a034ebd847 *inst/tmp/mefa.bib
 d984cf274b99855db8d0944fe1ddf8b3 *man/aggregate.mefa.Rd
 90c91413221284b6d3379e3c7a3aea3e *man/aoplot.Rd
